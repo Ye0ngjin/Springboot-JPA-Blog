@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/mainpage.css">
 <title>Hide on 404</title>
 </head>
 
@@ -57,18 +56,35 @@
 			<div class="board_list_wrap">
 				<div class="board_list">
 
-					<%--                  <c:forEach var="board" items="${list}">
-                     <p>${board.num} - ${board.user_id} - ${board.title}
-
-                 </c:forEach> --%>
 
 					<c:forEach var="board" items="${boards.content}">
-						<div class="card m-2">
-							<div class="card-body">
-								<h4 class="card-title">${board.title}</h4>
-								<a href="/board/${board.id}" class="btn btn-primary">상세보기</a>
+
+						<div>${board.id}
+							<div class="title">
+								<a class="tjfaud" onclick="" href="/board/${board.id}">${board.title}</a>
 							</div>
+							<div class="writer">${board.user.username}</div>
+							<div class="date">
+								<script>
+									var createDate = new Date(
+											"${board.createDate}");
+									var formattedDate = createDate
+											.getFullYear()
+											+ "-"
+											+ (createDate.getMonth() + 1)
+											+ "-"
+											+ createDate.getDate()
+											+ " "
+											+ createDate.getHours()
+											+ ":"
+											+ createDate.getMinutes();
+									document.write(formattedDate);
+								</script>
+							</div>
+
+							<div class="count">${board.count}</div>
 						</div>
+
 					</c:forEach>
 
 					<ul class="pagination justify-content-center">

@@ -75,12 +75,6 @@ public class BoardController {
 //	    return "recruitment";
 //	}
 	
-	@GetMapping("/recruitment")
-	public String recruitment(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {  
-		model.addAttribute("boards", boardService.글목록(pageable));
-		return "recruitment"; // viewResolver 작동!!
-	}
-	
 	@RequestMapping(value = "/vote")
 	public String main3(Locale locale, Model model) {
 	    return "vote";
