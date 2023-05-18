@@ -1,0 +1,25 @@
+.text{
+    background-color:aliceblue;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 30px;
+    width: 300px;
+}
+.name{
+    font-size: 80%;
+    position: relative;
+}
+.sign_up{
+    width: 300px;
+    height: 30px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(201, 204, 201);
+    border-radius: 5px;
+    transition: 0.25s;
+}
+.sign_up:active{
+    background: rgb(175, 183, 175);
+}
+div{
+    text-align: center;
+}
