@@ -7,7 +7,7 @@
 </sec:authorize>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <title>Cos 블로그</title>
 <meta charset="utf-8">

@@ -1,0 +1,218 @@
+ /* 슬라이드쇼 */
+ #slideShow {
+     padding-top: 10px;
+     clear: both;
+     width: 100%;
+     height: 300px;
+     overflow: hidden;
+     position: relative;
+ }
+
+ #slides {
+     position: absolute;
+ }
+
+ #slides>img {
+     width: 100%;
+     float: left;
+ }
+
+ .button1 {
+     width: 100%;
+     height: 40px;
+     border: none;
+     background-color: #E6E6E6;
+ }
+
+ .button1 button {
+    padding-right: 15PX;
+    font-size: 23PX;
+     float: right;
+     border: none;
+     background-color: transparent;
+ }
+
+ #prev {
+     left: 0;
+     position: absolute;
+     height: 100%;
+     top: 0;
+     border: none;
+     padding: 20px;
+     background-color: transparent;
+     color: #000;
+     font-weight: 800;
+     font-size: 24px;
+     opacity: 0.5;
+ }
+
+ #next {
+     right: 0;
+     position: absolute;
+     height: 100%;
+     top: 0;
+     border: none;
+     padding: 20px;
+     background-color: transparent;
+     color: #000;
+     font-weight: 800;
+     font-size: 24px;
+     opacity: 0.5;
+ }
+
+ button:focus {
+     outline: 0;
+ }
+
+ /* 404 커뮤니티 */
+
+ .board_title {
+     margin: 15px;
+ }
+
+ .board_title strong {
+     font-size: 20px;
+ }
+
+ /* 리스트 */
+
+ .board_list {
+     width: 100%;
+     margin: 15px;
+
+ }
+
+ .board_list>div {
+     border-bottom: 1px solid #ddd;
+     font-size: 0;
+ }
+
+ .board_list>div>div {
+     display: inline-block;
+     padding: 15px 0;
+     text-align: center;
+     font-size: 16px;
+ }
+
+ .board_list>div.top>div {
+     font-weight: 600;
+ }
+
+ .board_list .title {
+     width: 60%;
+     text-align: left;
+ }
+
+ .board_list .writer {
+     width: 15%;
+ }
+
+ .board_list .date {
+     width: 15%;
+ }
+
+ .board_list .count {
+     width: 10%;
+ }
+
+ /* 글쓰기 */
+
+ .board_wrap {
+     padding-bottom: 10px;
+ }
+
+ .board_write_wrap {
+     height: 500px;
+     border-bottom: 2px solid #000;
+ }
+
+ .hide {
+    display: none;
+  }
+  
+ .board_write {
+     border-top: 2px solid #000;
+
+ }
+
+ .board_write .title,
+ .board_write .info {
+     padding: 15px;
+ }
+
+ .board_write .info {
+     border-top: 1px dashed #ddd;
+     border-bottom: 1px solid #000;
+     font-size: 0;
+ }
+
+ .board_write .title dl {
+     font-size: 0;
+ }
+
+ .board_write .info dl {
+     display: inline-block;
+     width: 50%;
+     vertical-align: middle;
+ }
+
+ .board_write .title dt,
+ .board_write .title dd,
+ .board_write .info dt,
+ .board_write .info dd {
+     display: inline-block;
+     vertical-align: middle;
+     font-size: 15px;
+ }
+
+ .board_write .title dt,
+ .board_write .info dt {
+     width: 100px;
+ }
+
+ .board_write .title dd {
+     width: calc(100% - 100px);
+ }
+
+ .board_write .title input[type="text"],
+ .board_write .info input[type="text"],
+ .board_write .info input[type="password"] {
+     padding: 10px;
+     box-sizing: border-box;
+ }
+
+ .board_write .title input[type="text"] {
+     width: 80%;
+ }
+
+ .board_write .cont textarea {
+     display: block;
+     width: 100%;
+     height: 350px;
+     padding: 15px;
+     box-sizing: border-box;
+     border: none;
+     resize: none;
+ }
+
+ .on {
+     display: block;
+     position: relative;
+     float: right;
+     width: 50px;
+     text-align: center;
+     line-height: 50px;
+     border-radius: 5px;
+     transition: all 0.2s;
+     background-color: #E6E6E6;
+     margin: 10px;
+
+ }
+
+ .bt_wrap {
+     padding-top: 10px;
+ }
+
+ .contenthide{
+     height: 200px;
+ }
