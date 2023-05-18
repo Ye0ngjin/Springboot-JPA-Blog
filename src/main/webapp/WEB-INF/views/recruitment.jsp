@@ -20,8 +20,8 @@
   <!--   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-  <link rel="stylesheet" href="/resources/css/main.css">
-  <link rel="stylesheet" href="/resources/css/mainpage.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/mainpage.css">
   <link rel="icon"
     href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👀</text></svg>'>
    <style>
@@ -104,64 +104,6 @@
         </div>
 
 
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-              <h4 class="card-title">독서 모임</h4>
-              <div class="card-text">
-                <ul>
-                  <li>모집기한: ~ 00. 00. 00.</li>
-                  <li>모집인원: 10명</li>
-                  <li><span class="d-inline-block text-truncate" style="width: 100%;">Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Blanditiis, ut. Natus eius nobis voluptatem itaque, est reiciendis
-                      explicabo doloremque nesciunt dolores debitis error voluptates rem ea similique nihil obcaecati
-                      consequuntur.</span></li>
-                </ul>
-              </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">자세히 보기</button>
-                </div>
-                <div>
-                  <small class="text-muted mr-3">D-8</small>
-                  <small class="text-muted">6/10</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-              <h4 class="card-title">독서 모임</h4>
-              <div class="card-text">
-                <ul>
-                  <li>모집기한: ~ 00. 00. 00.</li>
-                  <li>모집인원: 10명</li>
-                  <li><span class="d-inline-block text-truncate" style="width: 100%;">Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Blanditiis, ut. Natus eius nobis voluptatem itaque, est reiciendis
-                      explicabo doloremque nesciunt dolores debitis error voluptates rem ea similique nihil obcaecati
-                      consequuntur.</span></li>
-                </ul>
-              </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">자세히 보기</button>
-                </div>
-                <div>
-                  <small class="text-muted mr-3">D-8</small>
-                  <small class="text-muted">6/10</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
       </div>
     </div>
 
@@ -217,7 +159,7 @@
 
 
 
-  <script src="/resources/js/resize_height.js"></script>
+  <script src="js/resize_height.js"></script>
 
   <script>
     $(document).ready(

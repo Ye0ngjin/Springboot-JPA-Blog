@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hide on 404 - 투표방</title>
-    <link rel="stylesheet" href="/resources/css/main.css">
-    <link rel="stylesheet" href="/resources/css/vote.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/vote.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
@@ -41,19 +41,19 @@
             <!-- 게시된 투표글 목록 -->
             <div class="choiceList"> 
                 <span class="chSub">끼룪꺄륚끠룪꼬룎</span>
-                <a href="#"><img id="icon_del" src="/resources/images/delete.png"></a>
+                <a href="#"><img id="icon_del" src="images/delete.png"></a>
                 <div class="choice_realtime">
                     <p class="ch1">일이삼사오육칠팔구공일이삼사오육칠팔구공</p>
                     <div class="prcnt"><p class="result"></p></div>
                     <p class="ch2">일이삼사오육칠팔구공일이삼사오육칠팔구공</p>
-                    <span class="ch_count"><p class="count1">38<a href="#"><img class="icon_boom1" src="/resources/images/boomUp1.png"></a></p>
-                        <p class="count2"><a href="#"><img class="icon_boom2" src="/resources/images/boomUp2.png"></a>62</p></span>
+                    <span class="ch_count"><p class="count1">38<a href="#"><img class="icon_boom1" src="images/boomUp1.png"></a></p>
+                        <p class="count2"><a href="#"><img class="icon_boom2" src="images/boomUp2.png"></a>62</p></span>
                 </div>
             </div>
         </div>
 <%@ include file = "footer.jsp" %>
     </div>
-<script src="/resources/js/vote_choice.js"></script>
+<script src="js/vote_choice.js"></script>
 
 </body>
 

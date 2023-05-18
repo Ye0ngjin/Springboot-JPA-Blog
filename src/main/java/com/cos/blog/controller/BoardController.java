@@ -1,5 +1,7 @@
 package com.cos.blog.controller;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cos.blog.service.BoardService;
 
@@ -43,4 +46,49 @@ public class BoardController {
 	public String saveForm() {
 		return "board/saveForm";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+//	@RequestMapping(value = "/main")
+//	public String main(Locale locale, Model model) {
+//	    return "main";
+//	}
+	
+	@GetMapping("/main")
+	public String main(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {  
+		model.addAttribute("boards", boardService.글목록(pageable));
+		return "main"; // viewResolver 작동!!
+	}
+	
+	@RequestMapping(value = "/share")
+	public String main1(Locale locale, Model model) {
+	    return "share";
+	}
+	
+//	@RequestMapping(value = "/recruitment")
+//	public String main2(Locale locale, Model model) {
+//	    return "recruitment";
+//	}
+	
+	@GetMapping("/recruitment")
+	public String recruitment(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {  
+		model.addAttribute("boards", boardService.글목록(pageable));
+		return "recruitment"; // viewResolver 작동!!
+	}
+	
+	@RequestMapping(value = "/vote")
+	public String main3(Locale locale, Model model) {
+	    return "vote";
+	}
+	
+	
+	
+	
+	
+	
 }
