@@ -58,6 +58,8 @@
 
 
 					<c:forEach var="board" items="${boards.content}">
+<%-- 						<c:choose>
+							<c:when test="${board.sort==1}"> --%>
 
 						<div>${board.id}
 							<div class="title">
@@ -85,6 +87,8 @@
 							<div class="count">${board.count}</div>
 						</div>
 
+<%-- 							</c:when>
+						</c:choose> --%>
 					</c:forEach>
 
 					<ul class="pagination justify-content-center">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../header.jsp"%>
+<div id="container">
+<%@ include file="header.jsp"%>
 
 <div class="container">
 	<form>
@@ -28,6 +29,6 @@
 </div>
 
 <script src="/js/user.js"></script>
-<%@ include file="../footer.jsp"%>
-
+<%@ include file="footer.jsp"%>
+</div>
 

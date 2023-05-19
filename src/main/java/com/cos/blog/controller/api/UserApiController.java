@@ -25,7 +25,8 @@ public class UserApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@PostMapping("/auth/joinProc")
+//	@PostMapping("/auth/joinProc")
+	@PostMapping("/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		System.out.println("UserApiController : save 호출됨");
 		userService.회원가입(user);

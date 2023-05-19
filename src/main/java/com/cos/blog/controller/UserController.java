@@ -24,18 +24,21 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/auth/joinForm")
+//	@GetMapping("/auth/joinForm")
+	@GetMapping("/joinForm")
 	public String joinForm() {
-		return "user/joinForm";
+		return "joinForm";
 	}
 
-	@GetMapping("/auth/loginForm")
+//	@GetMapping("/auth/loginForm")
+	@GetMapping("/loginForm")
 	public String loginForm() {
-		return "user/loginForm";
+		return "loginForm";
 	}
 
-	@GetMapping("/user/updateForm")
+//	@GetMapping("/user/updateForm")
+	@GetMapping("/updateForm")
 	public String updateForm() {	
-	  return "user/updateForm";
+	  return "updateForm";
 	}
 }
