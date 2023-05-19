@@ -14,13 +14,14 @@
 		<%@ include file="header.jsp"%>
 		<div class="container">
 			<div class="row">
-			
+
 				<div class="col-md-4">
 					<div class="card mb-4 shadow-sm">
 						<div class="follow-card-body">
 
 
-							<button style="height: 100%; width: 100%; min-height:200px; font-size: 30px;"
+							<button
+								style="height: 100%; width: 100%; min-height: 200px; font-size: 30px;"
 								data-toggle="modal" href="#registerModal">+</button>
 
 
@@ -37,33 +38,33 @@
 
 
 
-				<div class="col-md-4">
-				
-					
-					<div class="card mb-4 shadow-sm">
-						<div class="card-body">
-							<h4 class="card-title">${board.title}</h4>
-							<div class="card-text">
-								<ul>
-									<li>모집기한: ~ ${board.title}</li>
-									<li>모집인원: ${board.limit_count}명</li>
-									<li><span class="d-inline-block text-truncate"
-										style="width: 100%;">${board.content}</span></li>
-								</ul>
-							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">자세히
-										보기</button>
+					<div class="col-md-4">
+
+
+						<div class="card mb-4 shadow-sm">
+							<div class="card-body">
+								<h4 class="card-title">${board.title}</h4>
+								<div class="card-text">
+									<ul>
+										<li>모집기한: ${board.daterange}</li>
+										<li>모집인원: ${board.limit_count}명</li>
+										<li><span class="d-inline-block text-truncate"
+											style="width: 100%;">${board.content}</span></li>
+									</ul>
 								</div>
-								<div>
-									<small class="text-muted mr-3">D-${board.end_at}</small> <small
-										class="text-muted">${board.is_end}</small>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<button type="button" class="btn btn-sm btn-outline-secondary"
+											data-toggle="modal" href="#detailModal${board.id}">자세히 보기</button>
+									</div>
+									<div>
+										<small class="text-muted mr-3">${dday}</small> <small
+											class="text-muted">${board.is_end}</small>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</c:forEach>
 
 
@@ -119,19 +120,19 @@
 					<form id="myForm" action="./evaluationRegisterAction.jsp"
 						method="post" autocomplete="off">
 						<div class="form-group">
-							<label>모집 제목</label> <input id="title" type="text" name="evaluationTitle"
-								class="form-control" maxlength="20">
+							<label>모집 제목</label> <input id="title" type="text"
+								name="evaluationTitle" class="form-control" maxlength="20">
 						</div>
 						<div class="form-group row">
 							<div class="col-md-8">
-								<label>모집 기한</label> <input class="form-control text-center"
-									type="text" name="daterange" 
+								<label>모집 기한</label> <input id="daterange" class="form-control text-center"
+									type="text" name="daterange"
 									value="0000년 00월 00일 ~ 0000년 00월 00일" readonly>
 							</div>
 							<div class="col-md-4">
-								<label>모집인원 (단위: 명)</label> <input id="limit_count" type="number" min="2"
-									max="99" name="recruitmentCountInput" class="form-control"
-									placeholder="인원수 선택" style="width: 100%;">
+								<label>모집인원 (단위: 명)</label> <input id="limit_count"
+									type="number" min="2" max="99" name="recruitmentCountInput"
+									class="form-control" placeholder="인원수 선택" style="width: 100%;">
 							</div>
 						</div>
 						<div class="form-group">
@@ -140,16 +141,59 @@
 								class="form-control" maxlength="2048" style="height: 180px;"></textarea>
 						</div>
 					</form>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal" onclick="resetForm()">취소</button>
-							<button id="btn-save" class="btn btn-primary">등록하기</button>
-						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal" onclick="resetForm()">취소</button>
+						<button id="btn-save" class="btn btn-primary">등록하기</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+
+
+<c:forEach var="board" items="${boards.content}">
+	<div class="modal fade" id="detailModal${board.id}" tabindex="-1" role="dialog"
+		aria-labelledby="modal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal">${board.title}</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" onclick="resetForm()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="myForm" action="./evaluationRegisterAction.jsp"
+						method="post" autocomplete="off">
+						<div class="form-group">
+							<label>내용</label>
+							<textarea type="text" name="evaluationContent" id="content"
+								class="form-control" maxlength="2048" style="height: 180px; background-color: unset;" readonly>${board.content}</textarea>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-8">
+								<label>모집 기간</label> <div class="form-control">${board.daterange}</div>
+							</div>
+							<div class="col-md-4">
+								<label>모집인원</label> <div class="form-control">${board.limit_count}명</div>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<c:if test="${board.user.id == principal.user.id}">
+							<a href="/recruitment/${board.id}/updateForm"
+								class="btn btn-warning">수정</a>
+							<button id="btn-delete" class="btn btn-danger">삭제</button>
+						</c:if>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</c:forEach>
 
 
 

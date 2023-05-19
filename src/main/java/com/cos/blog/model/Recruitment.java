@@ -50,10 +50,7 @@ public class Recruitment {
 	private LocalDateTime created_at;
 	
     @Column
-    private Date start_at;
-    
-    @Column
-    private Date end_at;
+    private String daterange;
 
     @Column
     private Date updated_at;

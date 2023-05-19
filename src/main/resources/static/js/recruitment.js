@@ -15,7 +15,8 @@ let index = {
 			let data = {
 					title: $("#title").val(),
 					content: $("#content").val(),
-					limit_count: $("#limit_count").val()
+					limit_count: $("#limit_count").val(),
+					daterange: $("#daterange").val()
 			};
 			
 			$.ajax({ 
@@ -53,7 +54,8 @@ let index = {
 			let data = {
 					title: $("#title").val(),
 					content: $("#content").val(),
-					limit_count: $("#limit_count").val()
+					limit_count: $("#limit_count").val(),
+					daterange: $("#daterange").val()
 			};
 
 			$.ajax({ 
