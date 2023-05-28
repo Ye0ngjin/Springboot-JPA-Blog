@@ -27,18 +27,17 @@ public class UserController {
 //	@GetMapping("/auth/joinForm")
 	@GetMapping("/joinForm")
 	public String joinForm() {
-		return "joinForm";
+		return "user/joinForm";
 	}
 
 //	@GetMapping("/auth/loginForm")
 	@GetMapping("/loginForm")
 	public String loginForm() {
-		return "loginForm";
+		return "user/loginForm";
 	}
 
-//	@GetMapping("/user/updateForm")
-	@GetMapping("/updateForm")
+	@GetMapping("/user/updateForm")
 	public String updateForm() {	
-	  return "updateForm";
+	  return "user/updateForm";
 	}
 }

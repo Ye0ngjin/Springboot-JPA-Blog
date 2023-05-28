@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<%@ include file="header.jsp"%>
+		<%@ include file="../layout/header.jsp"%>
 		<div class="container">
 			<div class="row">
 
@@ -99,7 +99,7 @@
 		</div>
 
 
-		<%@ include file="footer.jsp"%>
+		<%@ include file="../layout/footer.jsp"%>
 
 	</div>
 
@@ -197,8 +197,8 @@
 
 
 
-	<script src="js/resize_height.js"></script>
-	<script src="js/recruitment.js"></script>
+	<script src="/js/resize_height.js"></script>
+	<script src="/js/recruitment.js"></script>
 
 	<script>
 		$(document).ready(

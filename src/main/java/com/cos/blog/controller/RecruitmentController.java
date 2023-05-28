@@ -25,7 +25,7 @@ public class RecruitmentController {
 	@GetMapping("/recruitment")
 	public String index(Model model, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {  
 		model.addAttribute("boards", recruitmentService.글목록(pageable));
-		return "recruitment"; // viewResolver 작동!!
+		return "recruitment/recruitment"; // viewResolver 작동!!
 	}
 	
 	@GetMapping("/recruitment/{id}")
@@ -38,7 +38,7 @@ public class RecruitmentController {
 	@GetMapping("/recruitment/{id}/updateForm")
 	public String updateForm(@PathVariable int id, Model model) {
 		model.addAttribute("board", recruitmentService.글상세보기(id));
-		return "board/updateForm";
+		return "recruitment/updateForm";
 	}
 	
 	// USER 권한이 필요

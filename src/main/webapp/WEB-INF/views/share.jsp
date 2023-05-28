@@ -8,17 +8,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hide on 404</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/mainpage.css">
-    <link rel="stylesheet" href="css/share.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mainpage.css">
+    <link rel="stylesheet" href="/css/share.css">
 </head>
 
 <body>
-    <script src="js/share.js"></script>
+    <script src="/js/share.js"></script>
     <div id="container">
 
 
-<%@ include file = "header.jsp" %>
+<%@ include file = "./layout/header.jsp" %>
 
         <div id="tabMenu">
             <input type="radio" id="tab1" name="tabs" checked="">
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="bt_wrap">
-                            <a href="main" class="on">등록</a>
+                            <a href="/main" class="on">등록</a>
                         </div>
                     </div>
 
@@ -78,9 +78,9 @@
                                     document.write("</a></div>");
                                     document.write("<div class='contenthide hide myDiv' style='display: none' >");
                                     document.write(a[i].content);
-                                    document.write(`</a><div class='bt_wrap'> <a href='main' class='on'>등록</a>
-                                           <a href='main' class='on'>수정</a>
-                                           <a href='main' class='on'>삭제</a>
+                                    document.write(`</a><div class='bt_wrap'> <a href='/main' class='on'>등록</a>
+                                           <a href='/main' class='on'>수정</a>
+                                           <a href='/main' class='on'>삭제</a>
                                       </div></div>`);
                                     document.write("</div>");
                                 }
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <div class="bt_wrap">
-                            <a href="main" class="on">등록</a>
+                            <a href="/main" class="on">등록</a>
                         </div>
                     </div>
 
@@ -143,9 +143,9 @@
                                     document.write("</a></div>");
                                     document.write("<div class='contenthide hide myDiv' style='display: none' >");
                                     document.write(a[i].content);
-                                    document.write(`</a><div class='bt_wrap'> <a href='main' class='on'>등록</a>
-                                           <a href='main' class='on'>수정</a>
-                                           <a href='main' class='on'>삭제</a>
+                                    document.write(`</a><div class='bt_wrap'> <a href='/main' class='on'>등록</a>
+                                           <a href='/main' class='on'>수정</a>
+                                           <a href='/main' class='on'>삭제</a>
                                       </div></div>`);
                                     document.write("</div>");
                                 }
@@ -157,7 +157,7 @@
             </div>
         </div>
 
-        <%@ include file = "footer.jsp" %>
+        <%@ include file = "./layout/footer.jsp" %>
     </div>
 </body>
 

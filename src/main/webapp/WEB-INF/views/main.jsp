@@ -11,23 +11,23 @@
 
 <body>
 	<div id="container">
-		<%@ include file="header.jsp"%>
+		<%@ include file="./layout/header.jsp"%>
 		<div id="slideShow">
 			<div id="slides">
-				<img src="images/photo-1.jpg" alt style="display: block;"> <img
-					src="images/photo-2.jpg" alt style="display: none;"> <img
-					src="images/photo-3.jpg" alt style="display: none;">
+				<img src="/images/photo-1.jpg" alt style="display: block;"> <img
+					src="/images/photo-2.jpg" alt style="display: none;"> <img
+					src="/images/photo-3.jpg" alt style="display: none;">
 				<button id="prev">&lang;</button>
 				<button id="next">&rang;</button>
 			</div>
 		</div>
 
-		<script src="js/main1.js"></script>
+		<script src="/js/main1.js"></script>
 
 		<div class="board_wrap">
 
 			<div class="board_title">
-				<strong>404 커뮤니티</strong>
+				<a class="nav-link" href="/board/saveForm"><strong>글쓰기</strong></a>
 			</div>
 
 			<div class="button1">
@@ -49,7 +49,7 @@
 					</div>
 				</div>
 				<div class="bt_wrap">
-					<a href="main" class="on">등록</a>
+					<a href="/main" class="on">등록</a>
 				</div>
 			</div>
 			<%--         ${name.get(0).content} --%>
@@ -84,7 +84,7 @@
 								</script>
 							</div>
 
-							<div class="count">${board.count}</div>
+<%-- 							<div class="count">${board.count}</div> --%>
 						</div>
 
 <%-- 							</c:when>
@@ -120,7 +120,7 @@
 			</div>
 		</div>
 
-		<%@ include file="footer.jsp"%>
+		<%@ include file="./layout/footer.jsp"%>
 	</div>
 </body>
 

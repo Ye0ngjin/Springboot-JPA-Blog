@@ -18,7 +18,7 @@ let index = {
 			let data = {
 					title: $("#title").val(),
 					content: $("#content").val(),
-					sort: $("#sort").val()
+					//sort: $("#sort").val()
 			};
 			
 			$.ajax({ 

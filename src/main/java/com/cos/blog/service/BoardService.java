@@ -27,7 +27,7 @@ public class BoardService {
 
 	@Transactional
 	public void 글쓰기(Board board, User user) { // title, content
-		//board.setCount(0);
+		board.setCount(0);
 		board.setUser(user);
 		boardRepository.save(board);
 	}

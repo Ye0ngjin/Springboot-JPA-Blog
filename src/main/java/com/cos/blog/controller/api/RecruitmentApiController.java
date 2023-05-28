@@ -35,9 +35,9 @@ public class RecruitmentApiController {
 	
 	@PutMapping("/api/recruitment/{id}")
 	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Recruitment recruitment){
-		System.out.println("BoardApiController : update : id : "+id);
-		System.out.println("BoardApiController : update : board : "+recruitment.getTitle());
-		System.out.println("BoardApiController : update : board : "+recruitment.getContent());
+		System.out.println("RecruitmentApiController : update : id : "+id);
+		System.out.println("RecruitmentApiController : update : board : "+recruitment.getTitle());
+		System.out.println("RecruitmentApiController : update : board : "+recruitment.getContent());
 		recruitmentService.글수정하기(id, recruitment);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
