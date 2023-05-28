@@ -38,6 +38,8 @@ public class RecruitmentApiController {
 		System.out.println("RecruitmentApiController : update : id : "+id);
 		System.out.println("RecruitmentApiController : update : board : "+recruitment.getTitle());
 		System.out.println("RecruitmentApiController : update : board : "+recruitment.getContent());
+		System.out.println("RecruitmentApiController : update : board : "+recruitment.getLimit_count());
+		System.out.println("RecruitmentApiController : update : board : "+recruitment.getDaterange());
 		recruitmentService.글수정하기(id, recruitment);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}

@@ -3,9 +3,11 @@ let index = {
 			$("#btn-save").on("click", ()=>{ 
 				this.save();
 			});
+			/*
 			$("#btn-delete").on("click", ()=>{ 
 				this.deleteById();
 			});
+			*/
 			$("#btn-update").on("click", ()=>{ 
 				this.update();
 			});
@@ -27,12 +29,13 @@ let index = {
 				dataType: "json"
 			}).done(function(resp){
 				alert("글쓰기가 완료되었습니다.");
-				location.href = "/";
+				location.href = "/recruitment";
+				//location.reload();
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			}); 
 		},
-		
+		/*
 		deleteById: function(){
 			let id = $("#id").text();
 			
@@ -42,20 +45,21 @@ let index = {
 				dataType: "json"
 			}).done(function(resp){
 				alert("삭제가 완료되었습니다.");
-				location.href = "/";
+				//location.href = "/";
+				location.reload();
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			}); 
 		},
-		
+		*/
 		update: function(){
 			let id = $("#id").val();
 			
 			let data = {
-					title: $("#title").val(),
-					content: $("#content").val(),
-					limit_count: $("#limit_count").val(),
-					daterange: $("#daterange").val()
+					title: $("#updateTitle").val(),
+					content: $("#updateContent").val(),
+					limit_count: $("#updateLimit_count").val(),
+					daterange: $("#updateDaterange").val()
 			};
 
 			$.ajax({ 
@@ -65,8 +69,8 @@ let index = {
 				contentType: "application/json; charset=utf-8",
 				dataType: "json"
 			}).done(function(resp){
-				alert("글수정이 완료되었습니다.");
-				location.href = "/";
+				alert("글수정이 완료되었습니다.")
+				location.reload();
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			}); 

@@ -50,6 +50,8 @@ public class RecruitmentService {
 				}); // 영속화 완료
 		recruitment.setTitle(requestRecruitment.getTitle());
 		recruitment.setContent(requestRecruitment.getContent());
+		recruitment.setLimit_count(requestRecruitment.getLimit_count());
+		recruitment.setDaterange(requestRecruitment.getDaterange());
 		// 해당 함수로 종료시(Service가 종료될 때) 트랜잭션이 종료됩니다. 이때 더티체킹 - 자동 업데이트가 됨. db flush
 	}
 	

@@ -22,20 +22,13 @@
 
 							<button
 								style="height: 100%; width: 100%; min-height: 200px; font-size: 30px;"
-								data-toggle="modal" href="#registerModal">+</button>
-
-
+								data-toggle="modal" data-target="#registerModal" onclick="resetForm()">+</button>
 
 
 						</div>
 					</div>
 				</div>
 				<c:forEach var="board" items="${boards.content}">
-
-
-
-
-
 
 
 					<div class="col-md-4">
@@ -55,7 +48,9 @@
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-outline-secondary"
-											data-toggle="modal" href="#detailModal${board.id}">자세히 보기</button>
+											data-toggle="modal" data-target="#detailModal${board.id}"
+											data-id="${board.id}" onclick="getBoardContent(${board.id})">자세히
+											보기</button>
 									</div>
 									<div>
 										<small class="text-muted mr-3">${dday}</small> <small
@@ -104,9 +99,9 @@
 	</div>
 
 
-
+	<!-- 모집 글 작성 모달 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
-		aria-labelledby="modal" aria-hidden="true">
+		aria-labelledby="modal" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -117,17 +112,16 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="myForm" action="./evaluationRegisterAction.jsp"
-						method="post" autocomplete="off">
+					<form id="myForm" autocomplete="off">
 						<div class="form-group">
 							<label>모집 제목</label> <input id="title" type="text"
 								name="evaluationTitle" class="form-control" maxlength="20">
 						</div>
 						<div class="form-group row">
 							<div class="col-md-8">
-								<label>모집 기한</label> <input id="daterange" class="form-control text-center"
-									type="text" name="daterange"
-									value="0000년 00월 00일 ~ 0000년 00월 00일" readonly>
+								<label>모집 기한</label> <input id="daterange"
+									class="form-control text-center" type="text" name="daterange"
+									readonly>
 							</div>
 							<div class="col-md-4">
 								<label>모집인원 (단위: 명)</label> <input id="limit_count"
@@ -152,48 +146,188 @@
 	</div>
 
 
+	<!-- 모집 글 상세페이지 모달 -->
+	<c:forEach var="board" items="${boards.content}">
+		<div class="modal fade" id="detailModal${board.id}" tabindex="-1"
+			role="dialog" aria-labelledby="modal" aria-hidden="true"
+			data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">${board.title}</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close" onclick="closeForm()">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label>내용</label>
+								<textarea type="text" name="evaluationContent"
+									id="content-${board.id}" class="form-control" maxlength="2048"
+									style="height: 180px; background-color: unset;" readonly></textarea>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-8">
+									<label>모집 기간</label>
+									<div id="daterange-${board.id}" class="form-control"></div>
+								</div>
+								<div class="col-md-4">
+									<label>모집인원</label>
+									<div id="limit_count-${board.id}" class="form-control"></div>
+								</div>
+							</div>
+						</form>
+						<div class="modal-footer">
+							<c:if test="${board.user.id == principal.user.id}">
+								<span id="id-${board.id}" style="display: none;">${board.id}</span>
+								<button id="btn-updateForm-${board.id}" class="btn btn-warning" data-dismiss="modal" aria-label="Close"
+									onclick="updateForm('${board.id}', '${board.title}', '${board.content}', '${board.limit_count}', '${board.daterange}')">수정</button>
+								<button id="btn-delete-${board.id}" class="btn btn-danger"
+									onclick="deleteForm('${board.id}')">삭제</button>
+							</c:if>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
 
-<c:forEach var="board" items="${boards.content}">
-	<div class="modal fade" id="detailModal${board.id}" tabindex="-1" role="dialog"
-		aria-labelledby="modal" aria-hidden="true">
+
+
+	<!-- 모집 글 수정 모달 -->
+	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+		aria-labelledby="modal" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modal">${board.title}</h5>
+					<h5 class="modal-title">모집 글 수정</h5>
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close" onclick="resetForm()">
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="myForm" action="./evaluationRegisterAction.jsp"
-						method="post" autocomplete="off">
+					<form autocomplete="off">
 						<div class="form-group">
-							<label>내용</label>
-							<textarea type="text" name="evaluationContent" id="content"
-								class="form-control" maxlength="2048" style="height: 180px; background-color: unset;" readonly>${board.content}</textarea>
+							<label>모집 제목</label> <input id="updateTitle" type="text"
+								name="evaluationTitle" class="form-control" maxlength="20">
 						</div>
 						<div class="form-group row">
 							<div class="col-md-8">
-								<label>모집 기간</label> <div class="form-control">${board.daterange}</div>
+								<label>모집 기한</label> <input id="updateDaterange"
+									class="form-control text-center" type="text" name="daterange"
+									readonly>
 							</div>
 							<div class="col-md-4">
-								<label>모집인원</label> <div class="form-control">${board.limit_count}명</div>
+								<label>모집인원 (단위: 명)</label> <input id="updateLimit_count"
+									type="number" min="2" max="99" name="recruitmentCountInput"
+									class="form-control" placeholder="인원수 선택" style="width: 100%;">
 							</div>
+						</div>
+						<div class="form-group">
+							<label>내용</label>
+							<textarea type="text" name="evaluationContent" id="updateContent"
+								class="form-control" maxlength="2048" style="height: 180px;"></textarea>
 						</div>
 					</form>
 					<div class="modal-footer">
-						<c:if test="${board.user.id == principal.user.id}">
-							<a href="/recruitment/${board.id}/updateForm"
-								class="btn btn-warning">수정</a>
-							<button id="btn-delete" class="btn btn-danger">삭제</button>
-						</c:if>
+						<span id="id" style="display: none;"></span>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
+						<button id="btn-update" class="btn btn-primary">수정완료</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</c:forEach>
+
+
+
+
+
+	<script>
+		$(document).ready(function() {
+		    // 모달이 숨겨질 때 호출되는 이벤트 핸들러
+		    $('[id^="detailModal"]').on('hidden.bs.modal', function() {
+		      closeForm();
+		    });
+		  });
+  function getBoardContent(boardId) {
+    // AJAX 요청을 통해 해당 게시글의 내용을 서버로부터 받아옵니다.
+    // 서버 요청을 처리하는 URL과 데이터 형식 등은 실제 환경에 맞게 수정해주셔야 합니다.
+    // 아래의 예시는 GET 방식으로 요청하고, JSON 형식의 응답을 받는 것을 가정합니다.
+    // 필요에 따라 요청 방식과 데이터 형식을 수정해주세요.
+    $.ajax({
+      url: '/recruitment/' + boardId,
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+        // 서버로부터 받아온 내용을 모달에 표시합니다.
+        $('#content-' + boardId).val(response.content);
+        $('#daterange-' + boardId).text(response.daterange);
+        $('#limit_count-' + boardId).text(response.limit_count + '명');
+      },
+      error: function(xhr, status, error) {
+        // 에러 처리 로직을 추가해주세요.
+      }
+    });
+  }
+
+  function closeForm() {
+    // 모달이 닫히면 내용을 초기화합니다.
+    $('[id^="content-"]').val('');
+    $('[id^="daterange-"]').text('');
+    $('[id^="limit_count-"]').text('');
+  }
+  function deleteForm(boardId) {
+	  let id = $("#id-" + boardId).text();
+	  
+	  $.ajax({ 
+	    type: "DELETE",
+	    url: "/api/recruitment/" + id,
+	    dataType: "json"
+	  }).done(function(resp){
+	    alert("삭제가 완료되었습니다.");
+	    location.reload();
+	  }).fail(function(error){
+	    alert(JSON.stringify(error));
+	  });
+	}
+
+  function updateForm(boardId, title, content, limit_count, daterange) {
+	  $("#updateTitle").val(title);
+	  $("#updateContent").val(content);
+	  $("#updateLimit_count").val(limit_count);
+	  
+	  // daterange 설정
+	  let startDate = moment(daterange.split(" ~ ")[0], "YYYY년 M월 D일");
+	  let endDate = moment(daterange.split(" ~ ")[1], "YYYY년 M월 D일");
+	  
+	  $('input[name="daterange"]').daterangepicker({
+	    "startDate": startDate,
+	    "endDate": endDate,
+	    "opens": 'center',
+	    "locale": {
+	      "format": "YYYY년 M월 D일",
+	      "separator": " ~ ",
+	      "applyLabel": "적용",
+	      "cancelLabel": "취소",
+	      "fromLabel": "시작일",
+	      "toLabel": "종료일",
+	      "customRangeLabel": "직접선택",
+	      "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+	      "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+	    }
+	  });
+	  
+	  $("#id").val(boardId);
+	  $("#updateModal").modal("show");
+	}
+
+
+</script>
 
 
 
@@ -253,7 +387,6 @@
 					today);
 		}
 	</script>
-
 
 
 </body>
