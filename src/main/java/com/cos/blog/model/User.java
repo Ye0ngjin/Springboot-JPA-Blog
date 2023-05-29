@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder // 빌더 패턴!!
 //ORM -> Java(다른언어) Object -> 테이블로 매핑해주는 기술
-@Entity // User 클래스가 MySQL에 테이블이 생성이 된다.
+@Entity // User 클래스가 SQL에 테이블이 생성이 된다.
 // @DynamicInsert // insert시에 null인 필드를 제외시켜준다.
 @Table(name = "users")
 public class User {
