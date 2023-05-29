@@ -1,7 +1,6 @@
 package com.cos.blog.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,17 +45,27 @@ public class Recruitment {
     @Column
     private Integer limit_count;
 	
-	@CreationTimestamp
+	@Column
 	private LocalDateTime created_at;
 	
     @Column
     private String daterange;
 
     @Column
-    private Date updated_at;
+    private LocalDateTime updated_at;
     
     @Column
     private Integer is_end;
 	
+    @PrePersist
+    protected void onCreate() {
+    	created_at = LocalDateTime.now();
+    	updated_at = null;
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        updated_at = LocalDateTime.now();
+    }
 	
 }

@@ -153,8 +153,8 @@
 			data-backdrop="static">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">${board.title}</h5>
+					<div class="modal-header" style="align-items: flex-end;">
+						<h5 class="modal-title" id="title-${board.id}"></h5><c:if test="${board.updated_at != null}"><small class="text-muted ml-2">(수정됨)</small></c:if>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close" onclick="closeForm()">
 							<span aria-hidden="true">&times;</span>
@@ -265,6 +265,7 @@
       dataType: 'json',
       success: function(response) {
         // 서버로부터 받아온 내용을 모달에 표시합니다.
+        $('#title-' + boardId).text(response.title);
         $('#content-' + boardId).val(response.content);
         $('#daterange-' + boardId).text(response.daterange);
         $('#limit_count-' + boardId).text(response.limit_count + '명');
@@ -277,6 +278,7 @@
 
   function closeForm() {
     // 모달이 닫히면 내용을 초기화합니다.
+    $('[id^="title-"]').text('');
     $('[id^="content-"]').val('');
     $('[id^="daterange-"]').text('');
     $('[id^="limit_count-"]').text('');

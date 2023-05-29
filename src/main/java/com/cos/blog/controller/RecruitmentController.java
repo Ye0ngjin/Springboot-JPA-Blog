@@ -49,10 +49,10 @@ public class RecruitmentController {
 //		return "recruitment/updateForm";
 //	}
 	
-	// USER 권한이 필요
-	@GetMapping("/recruitment/saveForm")
-	public String saveForm() {
-		return "recruitment/saveForm";
-	}
+//	// USER 권한이 필요
+//	@GetMapping("/recruitment/saveForm")
+//	public String saveForm() {
+//		return "recruitment/saveForm";
+//	}
 	
 }
