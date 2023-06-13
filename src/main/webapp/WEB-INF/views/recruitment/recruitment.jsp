@@ -22,7 +22,8 @@
 
 							<button
 								style="height: 100%; width: 100%; min-height: 200px; font-size: 30px;"
-								data-toggle="modal" data-target="#registerModal" onclick="resetForm()">+</button>
+								data-toggle="modal" data-target="#registerModal"
+								onclick="resetForm()">+</button>
 
 
 						</div>
@@ -154,7 +155,10 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header" style="align-items: flex-end;">
-						<h5 class="modal-title" id="title-${board.id}"></h5><c:if test="${board.updated_at != null}"><small class="text-muted ml-2">(수정됨)</small></c:if>
+						<h5 class="modal-title" id="title-${board.id}"></h5>
+						<c:if test="${board.updated_at != null}">
+							<small class="text-muted ml-2">(수정됨)</small>
+						</c:if>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close" onclick="closeForm()">
 							<span aria-hidden="true">&times;</span>
@@ -182,8 +186,9 @@
 						<div class="modal-footer">
 							<c:if test="${board.user.id == principal.user.id}">
 								<span id="id-${board.id}" style="display: none;">${board.id}</span>
-								<button id="btn-updateForm-${board.id}" class="btn btn-warning" data-dismiss="modal" aria-label="Close"
-									onclick="updateForm('${board.id}', '${board.title}', '${board.content}', '${board.limit_count}', '${board.daterange}')">수정</button>
+								<button id="btn-updateForm-${board.id}" class="btn btn-warning"
+									data-dismiss="modal" aria-label="Close"
+									onclick="updateForm('${board.id}'<%-- , '${board.title}', '${board.content}', '${board.limit_count}', '${board.daterange}' --%>)">수정</button>
 								<button id="btn-delete-${board.id}" class="btn btn-danger"
 									onclick="deleteForm('${board.id}')">삭제</button>
 							</c:if>
@@ -298,35 +303,48 @@
 	  });
 	}
 
-  function updateForm(boardId, title, content, limit_count, daterange) {
-	  $("#updateTitle").val(title);
-	  $("#updateContent").val(content);
-	  $("#updateLimit_count").val(limit_count);
-	  
-	  // daterange 설정
-	  let startDate = moment(daterange.split(" ~ ")[0], "YYYY년 M월 D일");
-	  let endDate = moment(daterange.split(" ~ ")[1], "YYYY년 M월 D일");
-	  
-	  $('input[name="daterange"]').daterangepicker({
-	    "startDate": startDate,
-	    "endDate": endDate,
-	    "opens": 'center',
-	    "locale": {
-	      "format": "YYYY년 M월 D일",
-	      "separator": " ~ ",
-	      "applyLabel": "적용",
-	      "cancelLabel": "취소",
-	      "fromLabel": "시작일",
-	      "toLabel": "종료일",
-	      "customRangeLabel": "직접선택",
-	      "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-	      "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+  function updateForm(boardId) {
+	  $.ajax({
+	    url: '/recruitment/' + boardId,
+	    type: 'GET',
+	    dataType: 'json',
+	    success: function(response) {
+	      // 서버로부터 받아온 내용을 모달에 표시합니다.
+	      $("#updateTitle").val(response.title);
+	      $("#updateContent").val(response.content);
+	      $("#updateDaterange").val(response.daterange);
+	      $("#updateLimit_count").val(response.limit_count);
+
+	      // daterange 설정
+	      let startDate = moment(response.daterange.split(" ~ ")[0], "YYYY년 M월 D일");
+	      let endDate = moment(response.daterange.split(" ~ ")[1], "YYYY년 M월 D일");
+
+	      $('input[name="daterange"]').daterangepicker({
+	        "startDate": startDate,
+	        "endDate": endDate,
+	        "opens": 'center',
+	        "locale": {
+	          "format": "YYYY년 M월 D일",
+	          "separator": " ~ ",
+	          "applyLabel": "적용",
+	          "cancelLabel": "취소",
+	          "fromLabel": "시작일",
+	          "toLabel": "종료일",
+	          "customRangeLabel": "직접선택",
+	          "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+	          "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+	        }
+	      });
+
+	      $("#id").val(boardId);
+	      $("#updateModal").modal("show");
+	    },
+	    error: function(xhr, status, error) {
+	      // 에러 처리 로직을 추가해주세요.
 	    }
 	  });
-	  
-	  $("#id").val(boardId);
-	  $("#updateModal").modal("show");
 	}
+
 
 
 </script>
