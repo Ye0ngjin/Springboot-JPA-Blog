@@ -11,7 +11,8 @@
 	</c:if>
 	<br /> <br />
 	<div>
-		글 번호 : <span id="id"><i>${board.id} </i></span> 작성자 : <span><i>${board.user.username} </i></span>
+		<!-- 글 번호 :  --><span id="id" style="display: none;"><i>${board.id} </i></span>
+		작성자 : <span><i>${board.user.username} </i></span>
 	</div>
 	<br />
 	<div>
@@ -45,7 +46,7 @@
 					<div>${reply.content}</div>
 					<div class="d-flex">
 						<div class="font-italic">작성자 : ${reply.user.username} &nbsp;</div>
-						<c:if test="${reply.user.id eq principal.user.id}">
+						<c:if test="${reply.user.id == principal.user.id}">
 							<button onClick="index.replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
 						</c:if>
 						
