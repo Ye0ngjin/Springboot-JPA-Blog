@@ -16,8 +16,8 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:xe
-    username: cos
-    password: cos1234
+    username: hideon
+    password: 404
 
   jpa:
     open-in-view: true
@@ -34,5 +34,5 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
-cos:
-  key: cos1234
+hideon:
+  key: 404

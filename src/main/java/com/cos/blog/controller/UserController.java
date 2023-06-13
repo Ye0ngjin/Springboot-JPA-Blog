@@ -15,8 +15,8 @@ import com.cos.blog.service.UserService;
 @Controller
 public class UserController {
 
-	@Value("${cos.key}")
-	private String cosKey;
+	@Value("${hideon.key}")
+	private String hideonKey;
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
