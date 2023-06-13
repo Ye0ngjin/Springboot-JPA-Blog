@@ -11,7 +11,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #000;
+/*     color: #000; */
 }
 
 #container {
@@ -173,5 +173,5 @@ footer li {
 
 p {
     font-size: 14px;
-    color: #757575;
+/*     color: #757575; */
 }
