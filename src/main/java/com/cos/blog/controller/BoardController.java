@@ -41,48 +41,21 @@ public class BoardController {
 		return "board/updateForm";
 	}
 	
-	// USER 권한이 필요
-	@GetMapping("/board/saveForm")
-	public String saveForm() {
-		return "board/saveForm";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-//	@RequestMapping(value = "/main")
-//	public String main(Locale locale, Model model) {
-//	    return "main";
+//	// USER 권한이 필요
+//	@GetMapping("/board/saveForm")
+//	public String saveForm() {
+//		return "board/saveForm";
 //	}
-	
-	@GetMapping("/main")
-	public String main(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {  
-		model.addAttribute("boards", boardService.글목록(pageable));
-		return "main"; // viewResolver 작동!!
-	}
 	
 	@RequestMapping(value = "/share")
 	public String main1(Locale locale, Model model) {
 	    return "share";
 	}
 	
-//	@RequestMapping(value = "/recruitment")
-//	public String main2(Locale locale, Model model) {
-//	    return "recruitment";
-//	}
-	
 	@RequestMapping(value = "/vote")
 	public String main3(Locale locale, Model model) {
 	    return "vote";
 	}
-	
-	
-	
-	
 	
 	
 }

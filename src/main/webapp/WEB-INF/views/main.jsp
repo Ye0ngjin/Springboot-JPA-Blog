@@ -27,38 +27,54 @@
 		<div class="board_wrap">
 
 			<div class="board_title">
-				<a class="nav-link" href="/board/saveForm"><strong>글쓰기</strong></a>
+				<strong>404 커뮤니티</strong>
 			</div>
 
-			<div class="button1">
-				<button style="font-size: 20px;">+</button>
-			</div>
 
-			<div class="board_write_wrap hide">
-				<div class="board_write">
-					<div class="title">
-						<dl>
-							<dt>제목</dt>
-							<dd>
-								<input type="text" placeholder="제목 입력">
-							</dd>
-						</dl>
+			<c:choose>
+				<c:when test="${empty principal}">
+					<div class="button2">
+						<a style="font-size: 20px;" href="/loginForm"><button
+								style="font-size: 20px;">+</button></a>
 					</div>
-					<div class="cont">
-						<textarea placeholder="내용 입력"></textarea>
+				</c:when>
+				<c:otherwise>
+					<div class="button1">
+						<button style="font-size: 20px;">+</button>
 					</div>
-				</div>
-				<div class="bt_wrap">
-					<a href="/main" class="on">등록</a>
-				</div>
-			</div>
-			<%--         ${name.get(0).content} --%>
+
+					<div class="board_write_wrap hide">
+						<form>
+							<div class="board_write">
+								<div class="title">
+									<dl>
+										<dt>제목</dt>
+										<dd>
+											<input type="text" id="title" placeholder="제목 입력">
+										</dd>
+									</dl>
+								</div>
+								<div class="cont">
+									<textarea class="form-control summernote" rows="5" id="content"></textarea>
+								</div>
+							</div>
+							<div class="bt_wrap">
+								<!--                     <input type="hidden" name="sort" value="1"> -->
+								<button id="btn-save" class="btn btn-secondary btn-sm">등록</button>
+
+							</div>
+						</form>
+					</div>
+				</c:otherwise>
+			</c:choose>
+
+
 			<div class="board_list_wrap">
 				<div class="board_list">
 
 
 					<c:forEach var="board" items="${boards.content}">
-<%-- 						<c:choose>
+						<%-- 						<c:choose>
 							<c:when test="${board.sort==1}"> --%>
 
 						<div>${board.id}
@@ -84,10 +100,10 @@
 								</script>
 							</div>
 
-<%-- 							<div class="count">${board.count}</div> --%>
+							<%-- 							<div class="count">${board.count}</div> --%>
 						</div>
 
-<%-- 							</c:when>
+						<%-- 							</c:when>
 						</c:choose> --%>
 					</c:forEach>
 
@@ -122,6 +138,13 @@
 
 		<%@ include file="./layout/footer.jsp"%>
 	</div>
+	<script src="/js/board.js"></script>
+	<script>
+		$('.summernote').summernote({
+			tabsize : 2,
+			height : 300
+		});
+	</script>
 </body>
 
 </html>

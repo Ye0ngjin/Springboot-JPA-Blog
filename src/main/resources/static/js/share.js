@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.button button');
+    const buttons = document.querySelectorAll('.button1 button');
     const writeWraps = document.querySelectorAll('.board_write_wrap');
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
