@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 연결할 인터페이스 경로를 namespace에 입력 -->
+<mapper namespace="com.cos.blog.repository.IVoteDao">
+	<!-- id = Dao에 작성한 함수명 / resultType = 연결한 인터페이스의 목록이 있는 Dto 경로 -->
+	<select id="voteList" resultType="com.cos.blog.dto.VoteDto">
+	<!-- 쿼리문 입력(세미콜론 쓰면 에러남) -->
+		select * from VOTEPOSTS order by num desc
+	</select>
+	 <!-- DB에 내용 추가(insert에서는 resultType 없음) -->
+	<insert id="voteWrite">
+		insert into VOTEPOSTS(num,choiceSub,choice_1,choice_2) 
+		values((select  max(num)+1  from VOTEPOSTS), #{choiceSub}, #{choice_1}, #{choice_2})
+	</insert>
+	
+	<update id="updateVote" >
+		update VOTEPOSTS set choiceSub=#{param2}, choice_1=#{param3}, choice_2=#{param4}
+		where num=#{param1}
+	</update>
+	
+	<update id="countUp">
+ 		 update VOTEPOSTS set choice1_count = choice1_count + #{choice1_count}, choice2_count = choice2_count + #{choice2_count}
+		 where num = #{num}
+	</update>
+	
+	<delete id="deleteVote">
+		delete from VOTEPOSTS where num=#{param1}
+	</delete>
+</mapper>

@@ -52,10 +52,10 @@ public class BoardController {
 	    return "share";
 	}
 	
-	@RequestMapping(value = "/vote")
-	public String main3(Locale locale, Model model) {
-	    return "vote";
-	}
+//	@RequestMapping(value = "/vote")
+//	public String main3(Locale locale, Model model) {
+//	    return "vote";
+//	}
 	
 	
 }

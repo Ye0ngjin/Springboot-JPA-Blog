@@ -36,3 +36,10 @@ spring:
 
 hideon:
   key: 404
+
+mybatis:
+  type-aliases-package: com.cos.blog
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    jdbc-type-for-null: null
+    cache-enabled: false

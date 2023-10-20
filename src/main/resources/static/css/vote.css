@@ -37,7 +37,6 @@ aside ul li {
 aside ul li:hover {
     font-weight: bold;
 }
-
 /* 투표글 작성 버튼 */
 .button button {
    padding-right: 15PX;
@@ -60,29 +59,6 @@ aside ul li:hover {
 .hide{
     display: none;
 }
- 
-/* .ch_count>p>input {
-    display: none;
-} */
-
-/*i[class="bi bi-plus-circle"] {
-    float: right;
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-    text-align: center;
-} 
-
-#creatChoice {
-    float: right;
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-    text-align: center;
-}
-#creatChoice:checked~#addChoice {
-    display: block;
-} */
 
 /* 투표글 작성창 내용물 정렬용 */
 .align {
@@ -109,13 +85,10 @@ aside ul li:hover {
     padding: 5px;
     width: 60px;
 }
-.addChoiceText {
+/* .addChoiceText {
     width: 100px;
-}
+} */
 
-.choiceSub {
-    width: 310px;
-}
 /* 투표 시작 버튼 */
 #startChoice {
     float: right;
@@ -133,101 +106,82 @@ aside ul li:hover {
     background-color: black;
     color: white;
 }
-
+/* 투표글 수정 */
+.editChoice {
+	position:absolute;
+	transform:translate(-50%, -50%);
+	left: 50%;
+    margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 700px;
+    height: 200px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(255, 253, 250);
+    box-shadow: 0 0 5px gray;
+}
+.editChoice p {
+    display: inline-block;
+    margin-right: 0;
+    padding: 5px;
+    width: 60px;
+}
+.updVoteform{
+	height:70px;
+}
+h3{
+	padding:20px;
+}
 /* 투표 목록 */
 .choiceList {
-    top: 30px;
-    padding: 10px;
     margin: 0 auto;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 15px;	
+    padding: 10px;
     width: 800px;
     height: 250px;
-    /* border: 1px solid black; */
     background-color: rgb(255, 253, 250);
     border-radius: 5px;
     box-shadow: 0 0 5px gray;
-}
-.chSub{
-    display: inline-block;
-    padding: 15px;
-    margin-bottom: 20px;
-    width: 600px;    
-    font-weight: bolder;
-    font-size: 1.5em;
+	position: relative;
+    top: 10px;
 }
 .choice_realtime {
-    position: relative;
+    position: absolute;
     width: 750px;
-    margin: 0 auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
-/* 비율표시 막대 */
+.chBox1{
+	display:flex;	
+	flex-direction:column;
+	align-items:flex-end;
+	position:absolute;
+	left:0%;
+}
+.chBox2{
+	display:flex;	
+	flex-direction:column;
+	align-items:flex-end;
+	position:absolute;
+	right:0%;
+}
+/* gradient 변경하기 */
+:root{
+	--gradient-colors: linear-gradient(to right, rgb(117, 211, 255), rgb(255, 133, 117));
+}
 .prcnt {
     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+    left: 50%;
+    transform: translate(-50%, 50%);
     display: inline-block;
-    background: linear-gradient(to right, rgb(117, 211, 255)38%, rgb(255, 133, 117)38%); /* 추후 scrip 처리 예정 */
     border-radius: 5px;
     width: 500px;
     height: 50px;
-    margin: auto 5px;
-}
-.prcnt p{
-    position: relative;
-    width: 30px;
-    height: 20px;
-    margin-left: 80px;
-    top: 50%;
-    margin-top: -15px;
-    font-weight: bold;
-    font-size: large;
-}
+	background: var(--gradient-colors);
+    /* background: linear-gradient(to right, rgb(117, 211, 255)30%, rgb(255, 133, 117)70%); */
 
-/* .ch1{
-    display: inline-block;
-    width: 100px;
-    margin-right: 30px;
-    margin-left: 10px;
-    font-weight: bold;
-} */
-.ch2{
-    /* display: inline-block; */
-    float: right;
-    /* width: 100px;
-    text-align: center;
-    font-weight: bold; */
-}
-.ch1, .ch2{
-    display: inline-block;
-    width: 120px;
-    /* height: 75px; */
-    vertical-align: bottom;
-    text-align: center;
-    font-weight: bold;
-    word-break: break-all;
-}
-
-#icon_del{
-    float: right;
-    width: 50px;
-    height: 50px;    
-}
-.icon_boom1{
-    /* transform: translate(30%, -25%); */
-    width: 50px;
-    height: 50px;
-}
-.icon_boom2{
-    /* transform: translate(660%, -25%); */
-    width: 50px;
-    height: 50px;
-}
-.ch_count{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 .count1{
     display: flex;
@@ -241,5 +195,109 @@ aside ul li:hover {
     width: 100px;
     font-size: 1.5em;
 }
+/* .choiceList {
+    top: 30px;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 800px;
+    height: 250px;
+    border: 1px solid black;
+    background-color: rgb(255, 253, 250);
+    border-radius: 5px;
+    box-shadow: 0 0 5px gray;
+} */
+.chSub{
+    display: inline-block;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 600px;    
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+.prcnt p{
+    position: relative;
+    width: 30px;
+    height: 20px;
+    margin-left: 80px;
+    top: 50%;
+    margin-top: -15px;
+    font-weight: bold;
+    font-size: large;
+}
+.ch2{
+    float: right;
+}
+.ch1, .ch2{
+    display: inline-block;
+    width: 120px;
+    vertical-align: bottom;
+    text-align: center;
+    font-weight: bold;
+    word-break: break-all;
+}
 
+#icon_upd{
+	position:absolute;
+	top:5%;
+	right:7%;
+    float: right;
+    width: 50px;
+    height: 50px; 
+    cursor:pointer;
+    z-index: 1;
+}
+#icon_del{
+    float: right;
+    width: 50px;
+    height: 50px;    
+    cursor:pointer;
+}
+.leftCheck:checked ~ .icon_boom1{
+	padding:0;
+}
+.rightCheck:checked ~ .icon_boom2{
+	padding:0;
+}
+label>input{
+	display:none;
+}
+.icon_boom1{
+    width: 50px;
+    height: 50px;
+    padding:10px;
+    cursor:pointer;
+}
+.icon_boom2{
+    width: 50px;
+    height: 50px;
+    padding:10px;
+    cursor:pointer;
+}
+.ch_count{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.result1{
+	width: 90px;
+}
+.result2{
+	width: 80px;
+}
+.cDate{
+	position: absolute;
+	left:50%;
+	top:77%;
+    transform: translate(-50%, 100%);
+    ;
+}
 /* </vote> */
+
+
+
+
+
+
+
