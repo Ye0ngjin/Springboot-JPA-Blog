@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="bt_wrap">
-                            <a href="/main" class="on">등록</a>
+                            <a href="#" class="on">등록</a>
                         </div>
                     </div>
 
@@ -53,10 +53,10 @@
                         <div class="board_list">
                             <script>
                                 var a = [{ "title": "네카라쿠배당토 ㄱㄱ", "content": "안녕하세요 여러분", "name": "익명", "date": "2023.4.21" },
-                                { "title": "qkqh", "content": "안녕하세요 여러분2", "name": "익명", "date": "2023.4.24" },
-                                { "title": "안녕하세요33", "content": "안녕하세요 여러분3333", "name": "익명", "date": "2023.4.21" },
-                                { "title": "안녕하세요3444444", "content": "안녕하세요 444444444", "name": "문상진", "date": "2023.4.18" },
-                                { "title": "안녕하세요3444444", "content": "안녕하세요 1231413412321", "name": "문상진", "date": "2023.4.18" }
+                                { "title": "지금은", "content": "안녕하세요 여러분2", "name": "익명", "date": "2023.4.24" },
+                                { "title": "메인페이지의 게시판", "content": "안녕하세요 여러분3333", "name": "익명", "date": "2023.4.21" },
+                                { "title": "모집해요 게시판", "content": "안녕하세요 444444444", "name": "익명", "date": "2023.4.18" },
+                                { "title": "투표방 게시판만 사용가능합니다", "content": "안녕하세요 1231413412321", "name": "익명", "date": "2023.4.18" }
                                 ]
 
                                 for (var i = 0; i < a.length; i++) {
@@ -78,9 +78,9 @@
                                     document.write("</a></div>");
                                     document.write("<div class='contenthide hide myDiv' style='display: none' >");
                                     document.write(a[i].content);
-                                    document.write(`</a><div class='bt_wrap'> <a href='/main' class='on'>등록</a>
-                                           <a href='/main' class='on'>수정</a>
-                                           <a href='/main' class='on'>삭제</a>
+                                    document.write(`</a><div class='bt_wrap'> <a href='#' class='on'>등록</a>
+                                           <a href='#' class='on'>수정</a>
+                                           <a href='#' class='on'>삭제</a>
                                       </div></div>`);
                                     document.write("</div>");
                                 }
@@ -110,19 +110,19 @@
                             </div>
                         </div>
                         <div class="bt_wrap">
-                            <a href="/main" class="on">등록</a>
+                            <a href="#" class="on">등록</a>
                         </div>
                     </div>
 
                     <div class="board_list_wrap">
                         <div class="board_list">
                             <script>
-                                var a = [{ "title": "주말에 학원 몇시까지 문열어?", "content": "안녕하세요 여러분", "name": "익명", "date": "2023.4.21" },
-                                { "title": "qkqh", "content": "안녕하세요 여러분2", "name": "익명", "date": "2023.4.24" },
-                                { "title": "안녕하세요33", "content": "안녕하세요 여러분3333", "name": "익명", "date": "2023.4.21" },
-                                { "title": "안녕하세요3444444", "content": "안녕하세요 444444444", "name": "문상진", "date": "2023.4.18" },
-                                { "title": "안녕하세요3444444", "content": "안녕하세요 1231413412321", "name": "문상진", "date": "2023.4.18" }
-                                ]
+                                var a = [{ "title": "네카라쿠배당토 ㄱㄱ", "content": "안녕하세요 여러분", "name": "익명", "date": "2023.4.21" },
+                                    { "title": "지금은", "content": "안녕하세요 여러분2", "name": "익명", "date": "2023.4.24" },
+                                    { "title": "메인페이지의 게시판", "content": "안녕하세요 여러분3333", "name": "익명", "date": "2023.4.21" },
+                                    { "title": "모집해요 게시판", "content": "안녕하세요 444444444", "name": "익명", "date": "2023.4.18" },
+                                    { "title": "투표방 게시판만 사용가능합니다", "content": "안녕하세요 1231413412321", "name": "익명", "date": "2023.4.18" }
+                                    ]
 
                                 for (var i = 0; i < a.length; i++) {
                                     document.write("<div>");
@@ -143,9 +143,9 @@
                                     document.write("</a></div>");
                                     document.write("<div class='contenthide hide myDiv' style='display: none' >");
                                     document.write(a[i].content);
-                                    document.write(`</a><div class='bt_wrap'> <a href='/main' class='on'>등록</a>
-                                           <a href='/main' class='on'>수정</a>
-                                           <a href='/main' class='on'>삭제</a>
+                                    document.write(`</a><div class='bt_wrap'> <a href='#' class='on'>등록</a>
+                                           <a href='#' class='on'>수정</a>
+                                           <a href='#' class='on'>삭제</a>
                                       </div></div>`);
                                     document.write("</div>");
                                 }

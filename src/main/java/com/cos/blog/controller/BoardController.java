@@ -1,5 +1,6 @@
 package com.cos.blog.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,12 @@ public class BoardController {
 	@GetMapping({"", "/"})
 	public String index(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {  
 		model.addAttribute("boards", boardService.글목록(pageable));
+
+		System.out.println(boardService.글목록(pageable).toList());
 		return "main"; // viewResolver 작동!!
 	}
 	
+
 	@GetMapping("/board/{id}")
 	public String findById(@PathVariable int id, Model model) {
 		model.addAttribute("board", boardService.글상세보기(id));

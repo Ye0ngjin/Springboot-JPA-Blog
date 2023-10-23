@@ -28,19 +28,19 @@ public class RecruitmentApiController {
 	}
 	
 	@DeleteMapping("/api/recruitment/{id}")
-	public ResponseDto<Integer> deleteById(@PathVariable int id){
-		recruitmentService.글삭제하기(id);
+	public ResponseDto<Integer> deleteById(@PathVariable int id, @AuthenticationPrincipal PrincipalDetail principal){
+		recruitmentService.글삭제하기(id, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
 	
 	@PutMapping("/api/recruitment/{id}")
-	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Recruitment recruitment){
+	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Recruitment recruitment, @AuthenticationPrincipal PrincipalDetail principal){
 		System.out.println("RecruitmentApiController : update : id : "+id);
 		System.out.println("RecruitmentApiController : update : board : "+recruitment.getTitle());
 		System.out.println("RecruitmentApiController : update : board : "+recruitment.getContent());
 		System.out.println("RecruitmentApiController : update : board : "+recruitment.getLimit_count());
 		System.out.println("RecruitmentApiController : update : board : "+recruitment.getDaterange());
-		recruitmentService.글수정하기(id, recruitment);
+		recruitmentService.글수정하기(id, recruitment, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	

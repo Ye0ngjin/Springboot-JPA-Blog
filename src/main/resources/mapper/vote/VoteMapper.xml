@@ -5,27 +5,69 @@
 
 <!-- 연결할 인터페이스 경로를 namespace에 입력 -->
 <mapper namespace="com.cos.blog.repository.IVoteDao">
-	<!-- id = Dao에 작성한 함수명 / resultType = 연결한 인터페이스의 목록이 있는 Dto 경로 -->
-	<select id="voteList" resultType="com.cos.blog.dto.VoteDto">
-	<!-- 쿼리문 입력(세미콜론 쓰면 에러남) -->
-		select * from VOTEPOSTS order by num desc
+
+
+	<resultMap id="voteResultMap" type="com.cos.blog.model.Vote">
+	    <id property="num" column="num" />
+	    <result property="choiceSub" column="choiceSub" />
+	    <result property="choice_1" column="choice_1" />
+	    <result property="choice_2" column="choice_2" />
+	    <result property="choice1_count" column="choice1_count" />
+	    <result property="choice2_count" column="choice2_count" />
+	    <result property="created_at" column="created_at" />
+	    <result property="isend" column="isend" />
+	    <!-- User 객체를 포함하는데, user_id 열을 외래 키로 사용합니다 -->
+		<association property="user" javaType="com.cos.blog.model.User">
+		    <id property="id" column="user_id" />
+		    <result property="username" column="username" />
+		    <result property="password" column="password" />
+		    <result property="email" column="email" />
+		    <result property="role" column="role" />
+		    <result property="oauth" column="oauth" />
+		    <result property="createDate" column="createDate" />
+		</association>
+	</resultMap>
+	
+	<select id="voteList" resultMap="voteResultMap">
+	    SELECT v.*, u.*
+	    FROM VOTEPOSTS v
+	    INNER JOIN USERS u ON v.user_id = u.id
+	    ORDER BY v.num DESC
 	</select>
-	 <!-- DB에 내용 추가(insert에서는 resultType 없음) -->
+
+	<!-- id = Dao에 작성한 함수명 / resultType = 연결한 인터페이스의 목록이 있는 Dto 경로 -->
+	<!-- 쿼리문 입력(세미콜론 쓰면 에러남) -->
+<!-- 	<select id="voteList" resultType="com.cos.blog.model.Vote">
+		SELECT User.* FROM VOTEPOSTS AS Vote INNER JOIN USERS AS User ON (Vote.user_id = User.id)
+        ORDER BY Vote.num DESC
+	</select> -->
+
+	<!-- DB에 내용 추가(insert에서는 resultType 없음) -->
+	<!-- <insert id="voteWrite"> insert into VOTEPOSTS(num,choiceSub,choice_1,choice_2) 
+		values((select max(num)+1 from VOTEPOSTS), #{choiceSub}, #{choice_1}, #{choice_2}) 
+		</insert> -->
 	<insert id="voteWrite">
-		insert into VOTEPOSTS(num,choiceSub,choice_1,choice_2) 
-		values((select  max(num)+1  from VOTEPOSTS), #{choiceSub}, #{choice_1}, #{choice_2})
+		<selectKey keyProperty="num" resultType="java.lang.Integer" order="BEFORE">
+			SELECT IFNULL(MAX(num) + 1, 1) FROM VOTEPOSTS
+		</selectKey>
+		INSERT INTO VOTEPOSTS(num, choiceSub, choice_1, choice_2, user_id)
+		VALUES(#{num}, #{choiceSub}, #{choice_1}, #{choice_2}, #{user_id})
 	</insert>
-	
-	<update id="updateVote" >
-		update VOTEPOSTS set choiceSub=#{param2}, choice_1=#{param3}, choice_2=#{param4}
-		where num=#{param1}
+
+
+	<update id="updateVote">
+		update VOTEPOSTS set
+		choiceSub=#{param2}, choice_1=#{param3}, choice_2=#{param4}, choice1_count = 0, choice2_count = 0
+		where
+		num=#{param1}
 	</update>
-	
+
 	<update id="countUp">
- 		 update VOTEPOSTS set choice1_count = choice1_count + #{choice1_count}, choice2_count = choice2_count + #{choice2_count}
-		 where num = #{num}
+		update VOTEPOSTS set choice1_count = choice1_count + #{choice1_count},
+		choice2_count = choice2_count + #{choice2_count}
+		where num = #{num}
 	</update>
-	
+
 	<delete id="deleteVote">
 		delete from VOTEPOSTS where num=#{param1}
 	</delete>

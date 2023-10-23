@@ -126,7 +126,7 @@
 							</div>
 							<div class="col-md-4">
 								<label>모집인원 (단위: 명)</label> <input id="limit_count"
-									type="number" min="2" max="99" name="recruitmentCountInput"
+									type="number" min="1" max="99" name="recruitmentCountInput"
 									class="form-control" placeholder="인원수 선택" style="width: 100%;">
 							</div>
 						</div>
@@ -227,7 +227,7 @@
 							</div>
 							<div class="col-md-4">
 								<label>모집인원 (단위: 명)</label> <input id="updateLimit_count"
-									type="number" min="2" max="99" name="recruitmentCountInput"
+									type="number" min="1" max="99" name="recruitmentCountInput"
 									class="form-control" placeholder="인원수 선택" style="width: 100%;">
 							</div>
 						</div>
@@ -296,7 +296,7 @@
 	    url: "/api/recruitment/" + id,
 	    dataType: "json"
 	  }).done(function(resp){
-	    alert("삭제가 완료되었습니다.");
+	    //alert("삭제가 완료되었습니다.");
 	    location.reload();
 	  }).fail(function(error){
 	    alert(JSON.stringify(error));

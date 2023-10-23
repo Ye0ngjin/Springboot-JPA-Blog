@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +46,13 @@
             <div class = "board_vote">
             <c:forEach var="vDto" items="${list }" varStatus="i">		
             <div class="choiceList">
-                <span class="chSub">Q${vDto.num}. &nbsp;${vDto.choiceSub }</span>		<!-- 투표 제목 -->
+                <span class="chSub"><%-- Q${vDto.num}. --%> &nbsp;${vDto.choiceSub }</span>		<!-- 투표 제목 -->
+                <c:if test="${vDto.user.id == principal.user.id}">
                 <a href="deleteVote?num=${vDto.num }"><img id="icon_del" src="images/delete.png"></a>		<!-- 삭제 버튼 -->	
+  				</c:if>
                 <div class="imgtoggle">
 			    	<span>
-			    		<img id="icon_upd" class="editBtn" src="images/update_open.png">			<!-- 편집 버튼 -->
+			    		<img id="icon_upd" class="editBtn" <c:if test="${vDto.user.id == principal.user.id}"> src="images/update_open.png" </c:if> <c:if test="${vDto.user.id != principal.user.id}">hidden</c:if>>			<!-- 편집 버튼 -->
 			    	</span>
   				</div>
                 <div class="choice_realtime">		
@@ -84,8 +87,9 @@
                 </div>
                  <!-- 투표글 수정창 -->
             <div class="editChoice hide"> 
+            	            <c:if test="${vDto.user.id == principal.user.id}">
                     <div class="align">
-                    <h3>Q${vDto.num }. 투표글 수정</h3>		<!-- 수정창 제목 -->
+                    <h3><%-- Q${vDto.num }. --%> 투표글 수정</h3>		<!-- 수정창 제목 -->
 	                    <form class="updVoteform" action="updateVote" method="post">
 	                    	<input type="hidden" name="num" value=${vDto.num }>
         	                <p>골라줘 :</p><input style="width: 400px;" type="text" name="choiceSub" id="choiceSub" maxlength="25"
@@ -95,8 +99,10 @@
                         	<p>홍코너 :</p><input type="text" name="choice_2" id="choice_2" class="ch2_value" maxlength="12" tabindex="3" required>
               	  		</form>
                     </div>
+                	        </c:if>
             </div>
-                               		<p class="cDate">${vDto.created_at }</p>		<!-- 생성일자 -->
+				<fmt:formatDate value="${vDto.created_at}" pattern="yyyy년 M월 d일 a h시 m분" var="formattedDate" />
+				<p class="cDate">${formattedDate}</p><!-- 생성일자 -->
             </div>            
             </c:forEach>
             </div>
@@ -105,6 +111,37 @@
     </div>
  <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script src="js/vote.js"></script>
+<script>
+/* //스크롤 위치 저장
+var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+localStorage.setItem("scrollPosition", scrollPosition);
+
+// 리다이렉트 후 스크롤 위치 복원
+window.onload = function() {
+  var savedScrollPosition = localStorage.getItem("scrollPosition");
+  if (savedScrollPosition) {
+    window.scrollTo(0, savedScrollPosition);
+    localStorage.removeItem("scrollPosition"); // 필요한 경우 삭제
+  }
+}; */
+//스크롤 위치 저장 (가로축 및 세로축)
+window.addEventListener('scroll', function() {
+  localStorage.setItem('scrollPositionX', window.scrollX);
+  localStorage.setItem('scrollPositionY', window.scrollY);
+});
+
+// 리다이렉트 후 스크롤 위치 복원 (가로축 및 세로축)
+window.addEventListener('load', function() {
+  var savedScrollPositionX = localStorage.getItem('scrollPositionX');
+  var savedScrollPositionY = localStorage.getItem('scrollPositionY');
+  if (savedScrollPositionX && savedScrollPositionY) {
+    window.scrollTo(savedScrollPositionX, savedScrollPositionY);
+    localStorage.removeItem('scrollPositionX'); // 필요한 경우 삭제
+    localStorage.removeItem('scrollPositionY'); // 필요한 경우 삭제
+  }
+});
+
+</script>
 </body>
 
 </html>

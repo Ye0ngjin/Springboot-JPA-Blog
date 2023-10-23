@@ -99,7 +99,7 @@ img {
 				<li><a href="/vote" id="voteEffect">투표방</a></li>
 				<li><a href="#">취업 200</a>
 					<ul>
-						<li><a href="https://www.jobkorea.co.kr/">사이트바로가기</a></li>
+						<li><a href="#">사이트바로가기</a></li>
 						<li><a href="#">추가 예정</a></li>
 					</ul></li>
 
