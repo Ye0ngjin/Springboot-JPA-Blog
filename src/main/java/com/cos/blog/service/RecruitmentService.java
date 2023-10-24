@@ -60,6 +60,9 @@ public class RecruitmentService {
 				.orElseThrow(()->{
 					return new IllegalArgumentException("글 찾기 실패 : 아이디를 찾을 수 없습니다.");
 				}); // 영속화 완료
+		if(requestRecruitment.getLimit_count() == null || requestRecruitment.getTitle() == "") {
+			return;
+		}
 		if(recruitment.getUser().getId() == user.getId()) {
 			
 			recruitment.setTitle(requestRecruitment.getTitle());

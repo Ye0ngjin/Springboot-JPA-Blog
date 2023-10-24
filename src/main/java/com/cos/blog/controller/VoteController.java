@@ -30,24 +30,25 @@ public class VoteController {
 	// 자동으로 Bean을 생성해줌
 	@Autowired
 	IVoteDao voteDao;	// 인터페이스명 변수명
+	// 투표목록을 담을 변수
+	List<Vote> list;
 	
 	// DB에서 데이터를 가져와서 투표목록 생성
 	@GetMapping("/vote")
 	public String voteList(Model model) {
-		// list를 가져옴
-		List<Vote> list = voteDao.voteList();
-
+		// DB에서 데이터를 가져와서 list에 저장
+		list = voteDao.voteList();
 		// model에 저장
-		/// model: Controller에서 생성된 데이터를 View로 전달할 때 사용하는 객체
+		// model: Controller에서 생성된 데이터를 View로 전달할 때 사용하는 객체
 		model.addAttribute("list", list);
-		System.out.println(list);
+		// System.out.println(list);
 		return "vote/vote";
 	}
 	
 	// 투표내용을 작성하여 DB에 전송(추가)
 	@RequestMapping("newVote")
 	// 들어오는 데이터를 파라미터로 받아줌
-	/// @RequestParam(intput태그의 "name"값), 타입 name값 >> 필요항목 수만큼 반복
+	// @RequestParam(intput태그의 "name"값), 타입 name값 >> 필요항목 수만큼 반복
 	public String newVote(
 			@AuthenticationPrincipal PrincipalDetail principal,
 			@RequestParam("choiceSub") String choiceSub,
@@ -59,10 +60,11 @@ public class VoteController {
 		int user_id = principal.getUser().getId();
 		int result = voteDao.voteWrite(choiceSub, choice_1, choice_2, user_id);
 		
-		 if(result == 1) { System.out.println("작성 성공"); 
-		 }else {
-		 System.out.println("작성 실패"); 
-		 }
+		if(result == 1) {
+			System.out.println("작성 성공"); 
+		}else {
+			System.out.println("작성 실패"); 
+		}
 		 
 		return "redirect:vote";
 
@@ -79,46 +81,60 @@ public class VoteController {
 			HttpServletRequest request
 			) {
 		
-	    List<Vote> list = voteDao.voteList();
-	    for (Vote vote : list) {
-	    	if(vote.getNum() == num) {
-	    		if (vote.getUser().getId() == principal.getUser().getId()) {
-	    			// 현재 사용자와 글의 작성자가 같은 경우
-	    			// 여기서 수정 또는 작업을 수행할 수 있습니다.
-	    			int result = voteDao.updateVote(num, choiceSub, choice_1, choice_2);
+		Vote vote = findByNum(num);
+		if (vote.getUser().getId() == principal.getUser().getId()) {
+			// 현재 사용자와 글의 작성자가 같은 경우
+			// 여기서 수정 또는 작업을 수행할 수 있습니다.
+			int result = voteDao.updateVote(num, choiceSub, choice_1, choice_2);
 
-	    			if(result == 1) {
-	    				System.out.println("수정 성공"); 
-	    				request.getSession().setAttribute("alert_message", "수정 성공!");
-	    				break;
-	    			}else {
-	    				System.out.println("수정 실패"); 
-	    				request.getSession().setAttribute("alert_message", "수정 실패!");
-	    				break;
-	    			}
-	    		}else {
-	    			// 현재 사용자와 글의 작성자가 다른 경우
-	    			System.out.println("작성자가 아닙니다");
-	    			break;
-	    		}
-	    	}
-	    }
+			if(result == 1) {
+				System.out.println("수정 성공"); 
+				request.getSession().setAttribute("alert_message", "수정 성공!");
+			}else {
+				System.out.println("수정 실패"); 
+				request.getSession().setAttribute("alert_message", "수정 실패!");
+			}
+		}else {
+			// 현재 사용자와 글의 작성자가 다른 경우
+			System.out.println("작성자가 아닙니다");
+		}
 	    return "redirect:vote";
 	}
 	
 	// count 증가
 	@RequestMapping("countUp")
 	public String countUp(
+			@AuthenticationPrincipal PrincipalDetail principal,
 			@RequestParam("num") int num,
 			@RequestParam("choice1_count") int choice1_count,
 			@RequestParam("choice2_count") int choice2_count,
 			HttpServletRequest request
 			) {
+		String username = principal.getUsername();
+		Vote vote = findByNum(num);
+		System.out.print("username: "+username);
+		System.out.print(", 글 번호: "+num);
+		System.out.print(", 글 제목: "+vote.getChoiceSub());
+		if(choice1_count * choice2_count != 0 || choice1_count + choice2_count != 1) {
+			System.out.println(" 에 잘못된 접근!");
+			return "redirect:vote";
+		}
 		int result = voteDao.countUp(num, choice1_count, choice2_count);
 		
-		String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
-		return "redirect:"+ referer; // 이전 페이지로 리다이렉트
-		//return "redirect:vote";
+		if(result == 1) {
+			System.out.print(choice1_count> choice2_count 
+							? ", choice1: "+vote.getChoice_1() 
+							: ", choice2: "+vote.getChoice_2());
+			System.out.println(" 카운트 1 증가 \t//결과//\t"
+								+(vote.getChoice1_count()+choice1_count)+" : "
+								+(vote.getChoice2_count()+choice2_count));
+		}else {
+			System.out.println(" 카운트 업 실패");
+		}
+		
+		// String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
+		// return "redirect:"+ referer; // 이전 페이지로 리다이렉트
+		return "redirect:vote";
 	}
 
 	// 투표글 삭제
@@ -127,33 +143,35 @@ public class VoteController {
 			@AuthenticationPrincipal PrincipalDetail principal,
 			@RequestParam("num") int num,
 			HttpServletRequest request) {
-	    
-	    List<Vote> list = voteDao.voteList();
-	    for (Vote vote : list) {
-	    	if(vote.getNum() == num) {
-	    		if (vote.getUser().getId() == principal.getUser().getId()) {
-	    			// 현재 사용자와 글의 작성자가 같은 경우
-	    			// 여기서 삭제 또는 작업을 수행할 수 있습니다.
-	    			int result = voteDao.deleteVote(num);
-	    			
-	    			if(result == 1) {
-	    				System.out.println("삭제 성공"); 
-	    				request.getSession().setAttribute("alert_message", "삭제 성공!");
-	    				break;
-	    			}else {
-	    				System.out.println("삭제 실패"); 
-	    				request.getSession().setAttribute("alert_message", "삭제 실패!");
-	    				break;
-	    			}
-	    		}else {
-	    			// 현재 사용자와 글의 작성자가 다른 경우
-	    			System.out.println("작성자가 아닙니다");
-	    			break;
-	    		}
-	    	}
-	    }
+		
+		Vote vote = findByNum(num);
+		if (vote.getUser().getId() == principal.getUser().getId()) {
+			// 현재 사용자와 글의 작성자가 같은 경우
+			// 여기서 삭제 또는 작업을 수행할 수 있습니다.
+			int result = voteDao.deleteVote(num);
+			
+			if(result == 1) {
+				System.out.println("삭제 성공"); 
+				request.getSession().setAttribute("alert_message", "삭제 성공!");
+			}else {
+				System.out.println("삭제 실패"); 
+				request.getSession().setAttribute("alert_message", "삭제 실패!");
+			}
+		}else {
+			// 현재 사용자와 글의 작성자가 다른 경우
+			System.out.println("작성자가 아닙니다");
+		}
 	    return "redirect:vote";
  
+	}
+	
+	public Vote findByNum(int num) {
+		for (Vote vote : list) {
+			if(vote.getNum() == num) {
+				return vote;
+			}
+		}
+		return null;
 	}
 }
 

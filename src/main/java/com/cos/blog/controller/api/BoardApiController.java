@@ -29,31 +29,31 @@ public class BoardApiController {
 	}
 	
 	@DeleteMapping("/api/board/{id}")
-	public ResponseDto<Integer> deleteById(@PathVariable int id){
-		boardService.글삭제하기(id);
+	public ResponseDto<Integer> deleteById(@PathVariable int id, @AuthenticationPrincipal PrincipalDetail principal){
+		boardService.글삭제하기(id, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
 	
 	@PutMapping("/api/board/{id}")
-	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board){
+	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal){
 		System.out.println("BoardApiController : update : id : "+id);
 		System.out.println("BoardApiController : update : board : "+board.getTitle());
 		System.out.println("BoardApiController : update : board : "+board.getContent());
-		boardService.글수정하기(id, board);
+		boardService.글수정하기(id, board, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 	// 데이터 받을 때 컨트롤러에서 dto를 만들어서 받는게 좋다.
 	// dto 사용하지 않은 이유는!! 
 	@PostMapping("/api/board/{boardId}/reply")
-	public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto) {
-		boardService.댓글쓰기(replySaveRequestDto);
+	public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto, @AuthenticationPrincipal PrincipalDetail principal) {
+		boardService.댓글쓰기(replySaveRequestDto, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
 	
 	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
-	public ResponseDto<Integer> replyDelete(@PathVariable int replyId) {
-		boardService.댓글삭제(replyId);
+	public ResponseDto<Integer> replyDelete(@PathVariable int replyId, @AuthenticationPrincipal PrincipalDetail principal) {
+		boardService.댓글삭제(replyId, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
 }

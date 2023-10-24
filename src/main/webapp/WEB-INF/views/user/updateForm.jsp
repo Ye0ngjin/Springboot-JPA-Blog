@@ -10,6 +10,7 @@
 			<input type="text" value="${principal.user.username }" class="form-control" placeholder="Enter username" id="username" readonly>
 		</div>
 		
+		<%-- sns로그인이 아닌 경우 --%>
 		<c:if test="${empty principal.user.oauth}">
 			<div class="form-group">
 				<label for="password">Password</label> 

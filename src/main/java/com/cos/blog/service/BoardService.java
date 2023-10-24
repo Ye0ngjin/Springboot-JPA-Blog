@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
 import com.cos.blog.repository.ReplyRepository;
@@ -29,6 +30,9 @@ public class BoardService {
 	public void 글쓰기(Board board, User user) { // title, content
 		board.setCount(0);
 		board.setUser(user);
+		if(board.getTitle() == "") {
+			return;
+		}
 		boardRepository.save(board);
 	}
 	
@@ -46,30 +50,61 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public void 글삭제하기(int id) {
-		System.out.println("글삭제하기 : "+id);
-		boardRepository.deleteById(id);
+	public void 글삭제하기(int id, User user) {
+		Board board = boardRepository.findById(id)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("글 찾기 실패 : 아이디를 찾을 수 없습니다.");
+				});
+		if(board.getUser().getId() == user.getId()) {
+			
+			System.out.println("글삭제하기 : "+id);
+			boardRepository.deleteById(id);
+		}else {
+			System.out.println("작성자가 아닙니다");
+		}
 	}
 	
 	@Transactional
-	public void 글수정하기(int id, Board requestBoard) {
+	public void 글수정하기(int id, Board requestBoard, User user) {
 		Board board = boardRepository.findById(id)
 				.orElseThrow(()->{
 					return new IllegalArgumentException("글 찾기 실패 : 아이디를 찾을 수 없습니다.");
 				}); // 영속화 완료
-		board.setTitle(requestBoard.getTitle());
-		board.setContent(requestBoard.getContent());
-		// 해당 함수로 종료시(Service가 종료될 때) 트랜잭션이 종료됩니다. 이때 더티체킹 - 자동 업데이트가 됨. db flush
+		if(requestBoard.getTitle() == "") {
+			return;
+		}
+		if(board.getUser().getId() == user.getId()) {
+			board.setTitle(requestBoard.getTitle());
+			board.setContent(requestBoard.getContent());
+			// 해당 함수로 종료시(Service가 종료될 때) 트랜잭션이 종료됩니다. 이때 더티체킹 - 자동 업데이트가 됨. db flush
+		}else {
+			System.out.println("작성자가 아닙니다");
+		}
 	}
 	
 	@Transactional
-	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
-		int result = replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
-		System.out.println("BoardService : "+result);
+	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto, User user) {
+		if(replySaveRequestDto.getUserId() == user.getId()) {
+			if(replySaveRequestDto.getContent() == "" || replySaveRequestDto.getContent() == null) {
+				return;
+			}
+			int result = replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+			System.out.println("BoardService : "+result+" 댓글이 작성됨");			
+		}else {
+			System.out.println("작성자가 아닙니다");
+		}
 	}
 	
 	@Transactional
-	public void 댓글삭제(int replyId) {
-		replyRepository.deleteById(replyId);
+	public void 댓글삭제(int replyId, User user) {
+		Reply reply = replyRepository.findById(replyId).orElseThrow(()->{
+			return new IllegalArgumentException("글 찾기 실패 : 아이디를 찾을 수 없습니다.");
+		});
+		if(reply.getUser().getId() == user.getId()) {
+			
+			replyRepository.deleteById(replyId);
+		}else {
+			System.out.println("작성자가 아닙니다");
+		}
 	}
 }

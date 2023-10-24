@@ -31,9 +31,19 @@ let index = {
 			}).done(function(resp){
 				if(resp.status === 500){
 					alert("회원가입에 실패하였습니다.");
-				}else{
-					alert("회원가입이 완료되었습니다.");
-					location.href = "/";
+				}else if(resp.status === 200){
+					    if (resp.data === 1) {
+							alert("회원가입이 완료되었습니다.");
+							location.href = "/";
+					    } else if (resp.data === 2) {
+					        alert("유저네임은 영문, 숫자, 한글, _, - 으로만 구성되어야하며 2~15자로 생성가능합니다.");
+					    } else if (resp.data === 3) {
+					        alert("비밀번호는 4자리 이상이어야 합니다.");
+					    } else if(resp.data === 4) {
+							alert("해당 이메일 주소 형식을 지원하지 않습니다.");
+						} else if(resp.data === 5) {
+							alert("이미 사용중인 유저네임입니다.");
+						}
 				}
 
 			}).fail(function(error){
@@ -58,9 +68,17 @@ let index = {
 				contentType: "application/json; charset=utf-8",// body데이터가 어떤 타입인지(MIME)
 				dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열 (생긴게 json이라면) => javascript오브젝트로 변경
 			}).done(function(resp){
-				alert("회원수정이 완료되었습니다.");
-				//console.log(resp);
-				location.href = "/";
+				if(resp.status === 500){
+					alert("회원정보 수정에 실패하였습니다.");
+				}else if(resp.status === 200){
+					if(resp.data === 1){
+						alert("회원수정이 완료되었습니다.");
+						//console.log(resp);
+						location.href = "/";
+					}else if (resp.data === 2) {
+						alert("비밀번호는 4자리 이상이어야 합니다.");
+					}
+				}
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			}); 
