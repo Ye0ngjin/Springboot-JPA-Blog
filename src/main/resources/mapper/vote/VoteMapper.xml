@@ -30,8 +30,8 @@
 	
 	<select id="voteList" resultMap="voteResultMap">
 	    SELECT v.*, u.*
-	    FROM VOTEPOSTS v
-	    INNER JOIN USERS u ON v.user_id = u.id
+	    FROM voteposts v
+	    INNER JOIN users u ON v.user_id = u.id
 	    ORDER BY v.num DESC
 	</select>
 
@@ -48,27 +48,27 @@
 		</insert> -->
 	<insert id="voteWrite">
 		<selectKey keyProperty="num" resultType="java.lang.Integer" order="BEFORE">
-			SELECT IFNULL(MAX(num) + 1, 1) FROM VOTEPOSTS
+			SELECT IFNULL(MAX(num) + 1, 1) FROM voteposts
 		</selectKey>
-		INSERT INTO VOTEPOSTS(num, choiceSub, choice_1, choice_2, user_id)
+		INSERT INTO voteposts(num, choiceSub, choice_1, choice_2, user_id)
 		VALUES(#{num}, #{choiceSub}, #{choice_1}, #{choice_2}, #{user_id})
 	</insert>
 
 
 	<update id="updateVote">
-		update VOTEPOSTS set
+		update voteposts set
 		choiceSub=#{param2}, choice_1=#{param3}, choice_2=#{param4}, choice1_count = 0, choice2_count = 0
 		where
 		num=#{param1}
 	</update>
 
 	<update id="countUp">
-		update VOTEPOSTS set choice1_count = choice1_count + #{choice1_count},
+		update voteposts set choice1_count = choice1_count + #{choice1_count},
 		choice2_count = choice2_count + #{choice2_count}
 		where num = #{num}
 	</update>
 
 	<delete id="deleteVote">
-		delete from VOTEPOSTS where num=#{param1}
+		delete from voteposts where num=#{param1}
 	</delete>
 </mapper>
