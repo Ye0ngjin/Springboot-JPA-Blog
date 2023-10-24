@@ -20,7 +20,10 @@ public class RecruitmentService {
 	@Transactional
 	public void 글쓰기(Recruitment recruitment, User user) { // title, content
 		recruitment.setUser(user);
-		if(recruitment.getLimit_count() == null || recruitment.getTitle() == "") {
+		if(recruitment.getLimit_count() == null || 
+		recruitment.getLimit_count() >= 100 || 
+		recruitment.getLimit_count() < 0 || 
+		recruitment.getTitle() == null || recruitment.getTitle() == "") {
 			return;
 		}
 		recruitmentRepository.save(recruitment);
@@ -60,7 +63,10 @@ public class RecruitmentService {
 				.orElseThrow(()->{
 					return new IllegalArgumentException("글 찾기 실패 : 아이디를 찾을 수 없습니다.");
 				}); // 영속화 완료
-		if(requestRecruitment.getLimit_count() == null || requestRecruitment.getTitle() == "") {
+		if(requestRecruitment.getLimit_count() == null || 
+		requestRecruitment.getLimit_count() >= 100 || 
+		requestRecruitment.getLimit_count() < 0 || 
+		requestRecruitment.getTitle() == null || requestRecruitment.getTitle() == "") {
 			return;
 		}
 		if(recruitment.getUser().getId() == user.getId()) {
