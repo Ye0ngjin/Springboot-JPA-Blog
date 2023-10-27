@@ -1,17 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-
-<head>
-<title>Hide on 404</title>
-</head>
-
-<body>
-	<div id="container">
-		<%@ include file="./layout/header.jsp"%>
+<%@ include file="./layout/header.jsp"%>
 		<div id="slideShow">
 			<div id="slides">
             	<img src="/images/1.png" alt style="display: block; width: 1200px; height:300px">
@@ -21,7 +11,6 @@
 			</div>
 		</div>
 
-		<script src="/js/main1.js"></script>
 
 		<div class="board_wrap">
 
@@ -135,15 +124,14 @@
 			</div>
 		</div>
 
-		<%@ include file="./layout/footer.jsp"%>
-	</div>
-	<script src="/js/board.js"></script>
-	<script>
-		$('.summernote').summernote({
-			tabsize : 2,
-			height : 300
-		});
-	</script>
+<%@ include file="./layout/footer.jsp"%>
+<script src="/js/main.js"></script>
+<script src="/js/board.js"></script>
+<script>
+	$('.summernote').summernote({
+		tabsize : 2,
+		height : 300
+	});
+</script>
 </body>
-
 </html>

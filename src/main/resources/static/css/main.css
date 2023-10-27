@@ -11,8 +11,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-/*     color: #000; */
+    
+/*========= 스크롤바 없애기 =========*/
+	
+/* 인터넷 익스플로러 */
+	-ms-overflow-style: none;
+	
+/* 파이어폭스 */
+	scrollbar-width: none;
 }
+
+/* 크롬, 사파리, 오페라, 엣지 */
+*::-webkit-scrollbar {
+	display: none;
+}
+/*===============================*/
 
 #container {
     /* border: 1px solid black; */

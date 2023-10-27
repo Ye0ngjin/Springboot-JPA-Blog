@@ -29,7 +29,32 @@ public class UserApiController {
 	@PostMapping("/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		int result = userService.회원가입(user);
-		System.out.println("UserApiController : save 호출됨"+"\t/\t"+result);
+		String logMessage = "";
+		switch (result){
+		case -1:
+			logMessage = "회원가입 오류 발생";
+			break;
+		case 1:
+			logMessage = "회원가입 처리 완료";
+			break;
+		case 2:
+			logMessage = "유효하지 않은 유저네임";
+			break;
+		case 3:
+			logMessage = "비밀번호가 4자리 미만 또는 20자리 초과";
+			break;
+		case 4:
+			logMessage = "유효하지 않은 이메일";
+			break;
+		case 5:
+			logMessage = "중복된 유저네임";
+			break;
+		case 6:
+			logMessage = "허용되지 않는 비밀번호";
+			break;
+
+		}
+		System.out.println("UserApiController : "+logMessage);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result); // 자바오브젝트를 JSON으로 변환해서 리턴 (Jackson)
 	}
 

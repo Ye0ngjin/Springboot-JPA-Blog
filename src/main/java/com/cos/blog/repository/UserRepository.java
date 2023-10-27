@@ -13,8 +13,9 @@ import com.cos.blog.model.User;
 // @Repository // 생략 가능하다.
 public interface UserRepository extends JpaRepository<User, Integer>{
 	// SELECT * FROM users WHERE username = 1?;
-	Optional<User> findByUsername(String username);
 	
+	Optional<User> findByUsername(String username);
+	// 둘 중에 뭘쓰는게 더 좋을지 모르겠음. 비슷하려나
 	boolean existsByUsername(String username);
 }
 

@@ -136,3 +136,19 @@ location.href = 'countUp?num=' + num + '&choice1_count=' + choice1_count + '&cho
   xhr.send();
 }
 */
+
+document.addEventListener("DOMContentLoaded", function() {
+  const elements = document.querySelectorAll('.ch2');
+  
+  elements.forEach(element => {
+    const contentSize = element.offsetWidth; // 요소의 전체 크기
+    const contentWidth = element.scrollWidth; // 실제 내용의 크기
+    
+    // 실제 내용이 요소의 크기를 벗어나면, 요소를 왼쪽으로 이동
+    if (contentSize < contentWidth) {
+      const offset = contentWidth - contentSize;
+      element.style.left = `-${offset}px`;
+      console.log(offset);
+    }
+  });
+});

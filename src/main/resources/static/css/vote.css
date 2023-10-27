@@ -214,7 +214,7 @@ h3{
     margin-bottom: 20px;
     width: 600px;    
     font-weight: bolder;
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 .prcnt p{
     position: relative;
@@ -228,6 +228,8 @@ h3{
 }
 .ch2{
     float: right;
+    position: relative; /* 추가: 요소의 위치를 변경하려면 position을 설정해야 함 */
+    left: 0; /* 초기 위치 */
 }
 .ch1, .ch2{
     display: inline-block;

@@ -1,13 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<footer>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+		<footer>
             <div id="bottomMenu">
                 <ul>
                     <li><a href="#">이용약관</a></li>
@@ -21,5 +13,4 @@
                 <p>경기도 광명시 판교역로 98 (대표전화) 123-456-7890</p>
             </div>
         </footer>
-</body>
-</html>
+	</div>

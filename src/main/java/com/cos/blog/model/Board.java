@@ -39,7 +39,8 @@ public class Board {
 	@Column(nullable = false, length = 100)
 	private String title;
 	
-	@Lob // 대용량 데이터
+	@Lob
+	@Column(columnDefinition = "MEDIUMTEXT")
 	private String content; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.
 	
 	private int count; // 게시판 정하기

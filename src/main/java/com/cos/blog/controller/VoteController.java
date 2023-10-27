@@ -1,6 +1,8 @@
 package com.cos.blog.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cos.blog.repository.IVoteDao;
 import com.cos.blog.config.auth.PrincipalDetail;
-import com.cos.blog.model.Board;
-import com.cos.blog.model.Recruitment;
+import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.model.Vote;
 
@@ -45,6 +46,34 @@ public class VoteController {
 		return "vote/vote";
 	}
 	
+	public Vote findByNum(int num) {
+		for (Vote vote : list) {
+			if(vote.getNum() == num) {
+				return vote;
+			}
+		}
+		return null;
+	}
+	
+	public boolean checkText(String text) {
+		if ( text == null ) {
+			System.out.println("null값 입력됨.");
+			return false; 
+		}
+		// 게시글 제목의 패턴을 정의
+		Pattern titlePattern = Pattern.compile("^\\S+( \\S+|  \\S+|\\t\\S+| \\t\\S+|\\t \\S+)*$");
+	    // 정규 표현식과 일치하는지 확인
+	    Matcher matcher = titlePattern.matcher(text);
+	    boolean result = matcher.matches();
+	    
+	    if(result) {
+	        System.out.println("제목과 선택지가 유효합니다.");
+	    }else {
+	        System.out.println("제목이나 선택지가 유효하지 않습니다.");
+	    }
+		return result;
+	}
+	
 	// 투표내용을 작성하여 DB에 전송(추가)
 	@RequestMapping("newVote")
 	// 들어오는 데이터를 파라미터로 받아줌
@@ -53,17 +82,36 @@ public class VoteController {
 			@AuthenticationPrincipal PrincipalDetail principal,
 			@RequestParam("choiceSub") String choiceSub,
 			@RequestParam("choice_1") String choice_1,
-			@RequestParam("choice_2") String choice_2
+			@RequestParam("choice_2") String choice_2,
+			HttpServletRequest request
 			) {
 		// insert, update, delete 3가지는 return값을 int로 받을 수 있음 (select는 list)
 
-		int user_id = principal.getUser().getId();
-		int result = voteDao.voteWrite(choiceSub, choice_1, choice_2, user_id);
-		
-		if(result == 1) {
-			System.out.println("작성 성공"); 
-		}else {
-			System.out.println("작성 실패"); 
+		User user = principal.getUser();
+		int user_id = user.getId();
+		if(user.getRole() == RoleType.USER) {
+			if (checkText(choiceSub) && 
+			checkText(choice_1) && 
+			checkText(choice_2) && 
+			choiceSub.length() <= 25 && 
+			choice_1.length() <= 12 && 
+			choice_2.length() <= 12) {
+				
+				int result = voteDao.voteWrite(choiceSub, choice_1, choice_2, user_id);
+				
+				if(result == 1) {
+					System.out.println("작성 성공"); 
+				}else {
+					System.out.println("작성 실패"); 
+				}
+			}else {
+				request.getSession().setAttribute("alert_message", "제목이나 선택지의 공백이나 글자수를 확인하세요.");
+			}
+			
+		} else if(user.getRole() == RoleType.ADMIN) {
+			
+		} else {
+			System.out.println("잘못된 계정 유형입니다. 현재 계정 유형: "+user.getRole());
 		}
 		 
 		return "redirect:vote";
@@ -85,15 +133,27 @@ public class VoteController {
 		if (vote.getUser().getId() == principal.getUser().getId()) {
 			// 현재 사용자와 글의 작성자가 같은 경우
 			// 여기서 수정 또는 작업을 수행할 수 있습니다.
-			int result = voteDao.updateVote(num, choiceSub, choice_1, choice_2);
-
-			if(result == 1) {
-				System.out.println("수정 성공"); 
-				request.getSession().setAttribute("alert_message", "수정 성공!");
+			
+			if (checkText(choiceSub) && 
+			checkText(choice_1) && 
+			checkText(choice_2) && 
+			choiceSub.length() <= 25 && 
+			choice_1.length() <= 12 && 
+			choice_2.length() <= 12) {
+				
+				int result = voteDao.updateVote(num, choiceSub, choice_1, choice_2);
+				
+				if(result == 1) {
+					System.out.println("수정 성공"); 
+					request.getSession().setAttribute("alert_message", "수정 성공!");
+				}else {
+					System.out.println("수정 실패"); 
+					request.getSession().setAttribute("alert_message", "수정 실패!");
+				}
 			}else {
-				System.out.println("수정 실패"); 
-				request.getSession().setAttribute("alert_message", "수정 실패!");
+				request.getSession().setAttribute("alert_message", "제목이나 선택지의 공백이나 글자수를 확인하세요.");
 			}
+			
 		}else {
 			// 현재 사용자와 글의 작성자가 다른 경우
 			System.out.println("작성자가 아닙니다");
@@ -132,8 +192,6 @@ public class VoteController {
 			System.out.println(" 카운트 업 실패");
 		}
 		
-		// String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
-		// return "redirect:"+ referer; // 이전 페이지로 리다이렉트
 		return "redirect:vote";
 	}
 
@@ -165,14 +223,6 @@ public class VoteController {
  
 	}
 	
-	public Vote findByNum(int num) {
-		for (Vote vote : list) {
-			if(vote.getNum() == num) {
-				return vote;
-			}
-		}
-		return null;
-	}
 }
 
 

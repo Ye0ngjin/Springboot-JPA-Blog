@@ -1,23 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hide on 404</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/mainpage.css">
-    <link rel="stylesheet" href="/css/share.css">
-</head>
-
-<body>
-    <script src="/js/share.js"></script>
-    <div id="container">
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file = "./layout/header.jsp" %>
 
         <div id="tabMenu">
@@ -157,8 +138,7 @@
             </div>
         </div>
 
-        <%@ include file = "./layout/footer.jsp" %>
-    </div>
+<%@ include file = "./layout/footer.jsp" %>
+<script src="/js/share.js"></script>
 </body>
-
 </html>
