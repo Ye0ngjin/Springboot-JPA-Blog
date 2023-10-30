@@ -12,13 +12,13 @@
 cd ~/Springboot-JPA-Blog
 
 # Git 저장소 상태 저장
-git status > status_before_update.txt
+git rev-parse HEAD > status_before_update.txt
 
 # 최신 변경 사항 가져오기
 git pull
 
 # Git 저장소 상태 저장
-git status > status_after_update.txt
+git rev-parse HEAD > status_after_update.txt
 
 # 이전 상태와 최신 상태 비교
 if diff status_before_update.txt status_after_update.txt &> /dev/null
