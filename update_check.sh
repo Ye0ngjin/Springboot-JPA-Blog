@@ -21,7 +21,7 @@ git pull
 git rev-parse HEAD > target/status_after_update.txt
 
 # 이전 상태와 최신 상태 비교
-if diff status_before_update.txt status_after_update.txt &> /dev/null
+if diff target/status_before_update.txt target/status_after_update.txt &> /dev/null
 then
   echo "$(date +'%Y-%m-%d-%H-%M-%S')	변화 없음" | tee -a target/nohup.out
 else
