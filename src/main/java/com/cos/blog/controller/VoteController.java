@@ -172,23 +172,26 @@ public class VoteController {
 			) {
 		String username = principal.getUsername();
 		Vote vote = findByNum(num);
-		System.out.print("username: "+username);
-		System.out.print(", 글 번호: "+num);
-		System.out.print(", 글 제목: "+vote.getChoiceSub());
 		if(choice1_count * choice2_count != 0 || choice1_count + choice2_count != 1) {
-			System.out.println(" 에 잘못된 접근!");
+			System.out.print("username: "+username);
+			System.out.print(", 글 번호: "+num);
+			System.out.print(", 글 제목: "+vote.getChoiceSub());
+			System.out.println(" 에 잘못된 접근!"+"choice1_count: "+choice1_count+"choice2_count: "+choice2_count);
 			return "redirect:vote";
 		}
 		int result = voteDao.countUp(num, choice1_count, choice2_count);
 		
 		if(result == 1) {
-			System.out.print(choice1_count> choice2_count 
-							? ", choice1: "+vote.getChoice_1() 
-							: ", choice2: "+vote.getChoice_2());
-			System.out.println(" 카운트 1 증가 \t//결과//\t"
-								+(vote.getChoice1_count()+choice1_count)+" : "
-								+(vote.getChoice2_count()+choice2_count));
+//			System.out.println(" 카운트 1 증가 \t//결과//\t"
+//								+(vote.getChoice1_count()+choice1_count)+" : "
+//								+(vote.getChoice2_count()+choice2_count));
 		}else {
+			System.out.print("username: "+username);
+			System.out.print(", 글 번호: "+num);
+			System.out.print(", 글 제목: "+vote.getChoiceSub());
+			System.out.print(choice1_count> choice2_count 
+					? ", choice1: "+vote.getChoice_1() 
+					: ", choice2: "+vote.getChoice_2());
 			System.out.println(" 카운트 업 실패");
 		}
 		
