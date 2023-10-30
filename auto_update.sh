@@ -20,9 +20,9 @@ mvn package | tee -a "target/$LOGFILE"
 
 # 4. 실행 파일 권한 변경
 echo "Changing the execution permissions of the application..."
-chmod 775 target/blog-0.0.1-SNAPSHOT.war
+chmod 775 target/blog-0.0.1-SNAPSHOT.war | tee -a "target/$LOGFILE"
 
 # 5. 웹 애플리케이션 다시 실행
 cd target
-echo "Starting the web application..."
+echo "Starting the web application..."| tee -a "target/$LOGFILE"
 nohup java -jar blog-0.0.1-SNAPSHOT.war &
