@@ -27,5 +27,5 @@ then
 else
   # 변경 사항이 있는 경우 스크립트 재실행 또는 조치 수행
   echo "$(date +'%Y-%m-%d-%H-%M-%S')	깃 수정됨. 서버를 다시 시작합니다." | tee -a target/nohup.out
-  /bin/bash auto_update.sh
+  ./auto_update.sh
 fi
