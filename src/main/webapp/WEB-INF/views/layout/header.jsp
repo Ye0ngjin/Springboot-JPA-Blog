@@ -136,12 +136,13 @@ if (dotIndex != -1) {
 </head>
 <body>
 <%-- JSP 페이지 상단 부분 --%>
-<%
+<%-- <%
 String alertMessage = (String) session.getAttribute("alert_message");
 Integer closeTimeout = (Integer) session.getAttribute("close_timeout");
 if (alertMessage != null && !alertMessage.equals("null")) {
 %>
-<%-- 23.10.27 현재 알림창 자동으로 닫는게 안되고 있다 --%>
+
+//23.10.27 현재 알림창 자동으로 닫는게 안되고 있다
 <script>
     var alertMessage = "<%= alertMessage %>";
 <% session.removeAttribute("alert_message");%>
@@ -154,7 +155,7 @@ if (alertMessage != null && !alertMessage.equals("null")) {
 <% session.removeAttribute("close_timeout");%>
 
     setTimeout(function() {
-    <%-- 메시지를 표시한 후 세션에서 제거 --%>
+        // 메시지를 표시한 후 세션에서 제거
         // 알림창을 닫음
     	popupWindow.close(); // 팝업 창을 닫기
     }, closeTimeout);
@@ -163,6 +164,22 @@ if (alertMessage != null && !alertMessage.equals("null")) {
 <%
 }
 %>
+ --%>
+<%
+String alertMessage = (String) session.getAttribute("alert_message");
+if (alertMessage != null && !alertMessage.equals("null")) {
+%>
+<script>
+    var alertMessage = "<%= alertMessage %>";
+    alert(alertMessage);
+    <%-- 메시지를 표시한 후 세션에서 제거 --%>
+    <% session.removeAttribute("alert_message");%>
+</script>
+<%
+}
+%>
+
+
 
 	<div id="container">
 
