@@ -23,9 +23,9 @@ git status > status_after_update.txt
 # 이전 상태와 최신 상태 비교
 if diff status_before_update.txt status_after_update.txt &> /dev/null
 then
-  echo "$(date +'%Y-%m-%d-%H-%M-%S')	변화 없음" | tee -a nohup.out
+  echo "$(date +'%Y-%m-%d-%H-%M-%S')	변화 없음" | tee -a target/nohup.out
 else
   # 변경 사항이 있는 경우 스크립트 재실행 또는 조치 수행
-  echo "$(date +'%Y-%m-%d-%H-%M-%S')	깃 수정됨. 서버를 다시 시작합니다." | tee -a nohup.out
+  echo "$(date +'%Y-%m-%d-%H-%M-%S')	깃 수정됨. 서버를 다시 시작합니다." | tee -a target/nohup.out
   /bin/bash auto_update.sh
 fi
