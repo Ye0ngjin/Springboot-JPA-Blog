@@ -64,8 +64,8 @@ public class RecruitmentService {
         if (page >= maxPageNum) {
         	page = maxPageNum;
         }
-        System.out.println("페이지 번호: "+page);
-        System.out.println("최대 페이지 수: "+maxPageNum);
+        //System.out.println("페이지 번호: "+page);
+        //System.out.println("최대 페이지 수: "+maxPageNum);
         pageable = PageRequest.of(page, size, pageable.getSort());
 		
 		return recruitmentRepository.findAll(pageable);

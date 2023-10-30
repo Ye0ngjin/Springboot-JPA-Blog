@@ -38,7 +38,7 @@ public class BoardApiController {
 	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal){
 		System.out.println("BoardApiController : update : id : "+id);
 		System.out.println("BoardApiController : update : board : "+board.getTitle());
-		System.out.println("BoardApiController : update : board : "+board.getContent());
+		//System.out.println("BoardApiController : update : board : "+board.getContent());
 		boardService.글수정하기(id, board, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}

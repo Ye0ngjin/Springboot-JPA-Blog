@@ -62,7 +62,7 @@ public class BoardController {
 		//System.out.println(referer);
 		
 		if (referer == null) {
-			request.getSession().setAttribute("alert_message", "현재 페이지 보수중입니다.");
+			request.getSession().setAttribute("alert_message", "정보공유 페이지는 보수중입니다.");
 			request.getSession().setAttribute("close_timeout", 1500);
 			return "redirect:/";
 		} else {
@@ -73,11 +73,11 @@ public class BoardController {
 				System.out.println(pageName);
 			}
 			if (pageName == "joinForm" || pageName == "loginForm") {
-				request.getSession().setAttribute("alert_message", "현재 페이지 보수중입니다.");
+				request.getSession().setAttribute("alert_message", "정보공유 페이지는 보수중입니다.");
 				request.getSession().setAttribute("close_timeout", 1500);
 				return "redirect:/";
 			}
-			request.getSession().setAttribute("alert_message", "현재 페이지 보수중입니다.");
+			request.getSession().setAttribute("alert_message", "정보공유 페이지는 보수중입니다.");
 			request.getSession().setAttribute("close_timeout", 1500);
 			return "redirect:" + referer; // 이전 페이지로 리다이렉트
 		}

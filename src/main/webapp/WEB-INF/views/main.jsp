@@ -1,6 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%
+    // 쿼리 파라미터 제거 및 URL 재구성(서머노트 글 작성시 ?files= 파라미터가 붙는 문제)
+   	
+	String currentServlet = request.getHttpServletMapping().getMatchValue();
+	int lastSlashIndex = currentServlet.lastIndexOf('/');
+	String result = currentServlet.substring(lastSlashIndex + 1);
+
+    //System.out.println(result);
+    String queryString = request.getQueryString();
+    queryString = "?" + queryString;
+	if (queryString != null && (queryString.contains("?files=") || queryString.contains("&files="))) {
+		String currentURL = "/";
+        currentURL += queryString;
+        currentURL = currentURL.replaceAll("[?&]files=[^&]*", "");
+        response.setHeader("Location", currentURL);
+	    response.setStatus(200);
+	    response.sendRedirect(currentURL);
+    }
+        
+	
+%>
+
 <%@ include file="./layout/header.jsp"%>
 		<div id="slideShow">
 			<div id="slides">
