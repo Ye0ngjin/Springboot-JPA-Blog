@@ -12,7 +12,7 @@ if (httpHost.equals("localhost")||httpHost.equals("127.0.0.1")) {
 	System.out.println(httpPort);
 	System.out.println(httpPath);
 */
-if (httpHost.equals("146.56.102.203")) {
+if (httpHost.equals("146.56.102.203") || httpPort == 8000) {
 %>
 <script>
     location.href = "http://hideon.online";
