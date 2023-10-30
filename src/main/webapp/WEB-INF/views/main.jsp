@@ -17,7 +17,7 @@
         currentURL += queryString;
         currentURL = currentURL.replaceAll("[?&]files=[^&]*", "");
         response.setHeader("Location", currentURL);
-	    response.setStatus(200);
+	    // response.setStatus(302);
 	    response.sendRedirect(currentURL);
     }
         
