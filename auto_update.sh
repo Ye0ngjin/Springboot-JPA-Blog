@@ -25,4 +25,4 @@ chmod 775 target/blog-0.0.1-SNAPSHOT.war | tee -a "target/$LOGFILE"
 # 5. 웹 애플리케이션 다시 실행
 cd target
 echo "Starting the web application..."| tee -a "$LOGFILE"
-nohup java -jar blog-0.0.1-SNAPSHOT.war &
+nohup java -jar blog-0.0.1-SNAPSHOT.war > nohup.out 2>&1 &
