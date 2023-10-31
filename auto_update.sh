@@ -8,7 +8,7 @@ SNAPSHOT="blog-0.0.1-SNAPSHOT"
 extension=".jar"
 
 # Get the packaging value from pom.xml
-packaging=$(xmlstarlet sel -t -v "/project/packaging" pom.xml)
+packaging=$(xmlstarlet sel -N ns="http://maven.apache.org/POM/4.0.0" -t -v "/ns:project/ns:packaging" pom.xml)
 
 # If packaging is "war," set the extension to .war
 if [ "$packaging" = "war" ]; then
