@@ -10,15 +10,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 import com.cos.blog.config.auth.PrincipalDetailService;
+
+import lombok.RequiredArgsConstructor;
 
 // 빈 등록 : 스프링 컨테이너에서 객체를 관리할 수 있게 하는 것
 
 @Configuration // 빈등록 (IoC관리)
 @EnableWebSecurity // 시큐리티 필터가 등록이 된다.
 //Controller에서 특정 권한이 있는 유저만 접근을 허용하려면 @PreAuthorize 어노테이션을 사용하는데, 해당 어노테이션을 활성화 시키는 어노테이션이다.
-@EnableGlobalMethodSecurity(prePostEnabled = true) 
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+/*@AllArgsConstructor*/
+//@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -45,20 +50,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.csrf().disable()  // csrf 토큰 비활성화 (테스트시 걸어두는 게 좋음)
-			.authorizeRequests()
-				.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/images/**", "/dummy/**", "/loginForm/**", "/joinForm/**", "/share/**")
-				.permitAll()
-				.antMatchers("/loginProc/**", "/joinProc/**").access("hasAuthority('ROLE_ANONYMOUS')")
-				.anyRequest()
-				.authenticated()
-			.and()
-				.formLogin()
-				.loginPage("/loginForm")
-				.loginProcessingUrl("/loginProc")
-				.defaultSuccessUrl("/"); // 스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인 해준다.
+		http.csrf().disable();  // csrf 토큰 비활성화 (테스트시 걸어두는 게 좋음)
+		http.authorizeRequests(authorize -> {
+			try{
+				authorize
+					.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/images/**", "/dummy/**", "/loginForm/**", "/joinForm/**", "/share/**")
+					.permitAll()
+					.antMatchers("/loginProc/**", "/joinProc/**").access("hasAuthority('ROLE_ANONYMOUS')")
+					.anyRequest()
+					.authenticated()
+				.and()
+					.formLogin()
+					.loginPage("/loginForm")
+					.loginProcessingUrl("/loginProc")
+					.defaultSuccessUrl("/"); // 스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인 해준다.
+			}catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			
+		});
 	}
 }
-//.loginPage("/auth/loginForm")
-//.loginProcessingUrl("/auth/loginProc")
