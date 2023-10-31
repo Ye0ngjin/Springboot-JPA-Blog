@@ -3,7 +3,20 @@
 cd ~/Springboot-JPA-Blog
 
 SNAPSHOT="blog-0.0.1-SNAPSHOT"
-extension=".war"
+
+# Set the default extension to .jar
+extension=".jar"
+
+# Get the packaging value from pom.xml
+packaging=$(xmlstarlet sel -t -v "/project/packaging" pom.xml)
+
+# If packaging is "war," set the extension to .war
+if [ "$packaging" = "war" ]; then
+    extension=".war"
+fi
+
+# Use the extension in your script
+echo "Extension is $extension" | tee -a target/nohup.out
 
 # 1. 현재 실행 중인 웹 애플리케이션 프로세스 종료, grep -v "grep"은 그랩 명령이 실행되는 프로세스가 나오는 것을 방지한다.
 PID=$(ps aux | grep "$SNAPSHOT" | grep -v "grep" | awk '{print $2}')
