@@ -61,7 +61,10 @@ public class RecruitmentService {
         if (page < 0 ) {
         	page = 0;
         }
-        if (page >= maxPageNum) {
+		if (maxPageNum < 0){
+			maxPageNum = 0;
+		}
+        if (page > maxPageNum) {
         	page = maxPageNum;
         }
         //System.out.println("페이지 번호: "+page);
