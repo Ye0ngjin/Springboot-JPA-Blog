@@ -27,8 +27,8 @@
 <%@ include file="./layout/header.jsp"%>
 		<div id="slideShow">
 			<div id="slides" style="width: 1200px;">
-            	<img src="/images/1.png" style="display: block; height: 300px; width: unset; margin-left: 25%;">
-            	<img src="/images/2.png" style="display: none; height: 300px; width: unset; margin-left: 25%;">
+            	<img src="/images/1.png" style="display: block; height: 300px; width: unset; float: unset; margin: 0 auto;">
+            	<img src="/images/2.png" style="display: none; height: 300px; width: unset; float: unset; margin: 0 auto;">
 				<button id="prev">&lang;</button>
 				<button id="next">&rang;</button>
 			</div>
