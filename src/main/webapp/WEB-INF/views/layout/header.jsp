@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<%-- 
 <%
 String httpHost = request.getServerName();
 int httpPort = request.getServerPort();
@@ -13,15 +12,14 @@ if (httpHost.equals("localhost")||httpHost.equals("127.0.0.1")) {
 	System.out.println(httpPort);
 	System.out.println(httpPath);
 */
-if (httpHost.equals("146.56.102.203") || (httpPort == 8000) && httpHost.equals("hideon.online")) {
+if (httpHost.equals("146.56.102.203") || (httpPort == 8000) && httpHost.equals("hideon404.online")) {
 %>
 <script>
-    location.href = "http://hideon.online";
+    location.href = "http://hideon404.online";
 </script>
 <%
 }
 %>
- --%>
 
 <!DOCTYPE html>
 <html lang="ko">
